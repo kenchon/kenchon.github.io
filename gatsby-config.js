@@ -32,6 +32,7 @@ module.exports = {
     ],
   },
   plugins: [
+    `gatsby-remark-emoji`,
     {
       resolve: `@lekoarts/gatsby-theme-specimens`,
       options: {
