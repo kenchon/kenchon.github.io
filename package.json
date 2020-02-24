@@ -5,10 +5,11 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "dev": "gatsby develop",
+    "dev": "rm -rf .cache && gatsby develop --host=0.0.0.0",
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@lekoarts/gatsby-theme-specimens": "^2.1.1",
     "@narative/gatsby-theme-novela": "^0.*",
     "gatsby": "^2.13.41",
     "gatsby-plugin-manifest": "^2.2.4",
