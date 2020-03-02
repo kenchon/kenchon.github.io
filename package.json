@@ -6,6 +6,7 @@
   "scripts": {
     "build": "gatsby build",
     "dev": "rm -rf .cache && gatsby develop --host=0.0.0.0",
+    "deploy": "gatsby build && gh-pages -d public -b master",
     "clean": "gatsby clean"
   },
   "dependencies": {
@@ -14,6 +15,8 @@
     "gatsby": "^2.13.41",
     "gatsby-plugin-manifest": "^2.2.4",
     "gatsby-remark-emoji": "^0.0.3",
+    "gatsby-transformer-remark": "^2.6.53",
+    "gh-pages": "^2.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }

@@ -32,7 +32,14 @@ module.exports = {
     ],
   },
   plugins: [
-    `gatsby-remark-emoji`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          `gatsby-remark-emoji`,  // <-- this line adds emoji
+        ]
+      }
+    },
     {
       resolve: `@lekoarts/gatsby-theme-specimens`,
       options: {
