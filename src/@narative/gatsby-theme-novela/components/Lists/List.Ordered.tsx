@@ -6,7 +6,7 @@ const OrderedList = styled.ol`
   counter-reset: list;
   color: ${p => p.theme.colors.articleText};
   position: relative;
-  padding: 15px 0 30px 30px;
+  padding: 6px 0px 10px 35px;
   margin: 0 auto;
   transition: ${p => p.theme.colorModeTransition};
   font-size: 18px;
