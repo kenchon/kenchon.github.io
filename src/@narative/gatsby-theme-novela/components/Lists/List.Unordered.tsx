@@ -28,7 +28,7 @@ const UnorderedList = styled.ul`
 
   li {
     position: relative;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 
     ${mediaqueries.tablet`
       padding-left: 30px;
