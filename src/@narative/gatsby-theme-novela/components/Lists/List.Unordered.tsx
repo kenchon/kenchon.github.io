@@ -65,7 +65,7 @@ const UnorderedList = styled.ul`
     width: 8px;
     background: ${p => p.theme.colors.articleText};
     border-radius: 50%;
-    background-color: navy;
+    background-color: ${p => p.theme.colors.list};
 
     ${mediaqueries.tablet`
       left: 0;
