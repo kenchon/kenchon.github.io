@@ -36,7 +36,7 @@ const h2 = styled.h2`
   word-break: keep-all;
   font-size: 32px;
   line-height: 1.333;
-  background:linear-gradient(transparent 70%, #FFFF00 50%); 
+  background:linear-gradient(transparent 70%, #e04700 50%); 
   ${commonStyles};
 
   ${mediaqueries.desktop`
