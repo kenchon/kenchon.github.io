@@ -9,7 +9,7 @@ const Blockquote = styled.blockquote`
 
   padding: 30px 30px 30px 30px;
   font-style: italic;
-  background-color: #f2f2f2;
+  background-color: ${p => p.theme.colors.quoteBackground};
   foreground-color: #3d3d3d;
   border-radius: 5px;
 

@@ -20,7 +20,8 @@ export default {
   horizontalRule: "rgba(8, 8, 11, 0.15)",
   inputBackground: "rgba(0, 0, 0, 0.05)",
   list: "#002575",
-  underline: "00FFFF",
+  quoteBackground: "#f2f2f2",
+  underline: "#ff99ab",
   modes: {
     dark: {
       grey: "#73737D",
@@ -41,7 +42,8 @@ export default {
       horizontalRule: "rgba(255, 255, 255, 0.15)",
       inputBackground: "rgba(255, 255, 255, 0.07)",
       list: "#4dc3ff",
-      underline: "FF00FF",
+      quoteBackground: "#636363",
+      underline: "#243dff",
     },
   },
 };
