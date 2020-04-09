@@ -1,7 +1,6 @@
 - name: Kenya Hondoh
-  bio: |-
-    Frontend engineer for half year.
-    I love Jazz, Drawing, Fashion ...
+  bio: |- 
+    フロントエンド開発を 1mm くらいやってたついでにブログを開設。
   avatar: ./avatars/kenya_hondoh.jpg
   social:
     - url: https://github.com/kenmikanmi
