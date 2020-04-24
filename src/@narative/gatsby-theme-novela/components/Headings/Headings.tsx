@@ -36,7 +36,7 @@ const h2 = styled.h2`
   word-break: keep-all;
   font-size: 32px;
   line-height: 1.333;
-  background:linear-gradient(transparent 70%, #e04700 50%); 
+  background:linear-gradient(transparent 90%, #e04700 50%); 
   ${commonStyles};
 
   ${mediaqueries.desktop`
@@ -57,7 +57,7 @@ const h3 = styled.h3`
   word-break: keep-all;
   font-size: 24px;
   line-height: 1.45;
-  background:linear-gradient(transparent 70%, #03a1fc 0%); 
+  background:linear-gradient(transparent 90%, #03a1fc 0%); 
   ${commonStyles};
 
   ${mediaqueries.tablet`
