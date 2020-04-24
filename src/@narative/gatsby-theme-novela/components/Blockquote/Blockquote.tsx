@@ -6,9 +6,12 @@ const Blockquote = styled.blockquote`
   margin: 15px auto 50px;
   color: ${p => p.theme.colors.articleText};
   font-family: ${p => p.theme.fonts.serif};
+  // font-size: ${p => p.theme.fonts.size};
+  font-weight: 0;
 
   padding: 30px 30px 30px 30px;
   // font-style: italic;
+  // 背景色が dark/light で切り替わるように設定
   background-color: ${p => p.theme.colors.quoteBackground};
   foreground-color: #3d3d3d;
   border-radius: 10px;
@@ -25,16 +28,15 @@ const Blockquote = styled.blockquote`
     width: 100%;
     margin: 0 auto;
     // font-size: 36px;
-    line-height: 1.75;
-    // font-weight: normal;
+    line-height: 1.75; // 行間の幅
 
     ${mediaqueries.tablet`
-      font-size: 26px;
+      // font-size: 26px;
       padding: 0 180px;
     `};
 
     ${mediaqueries.phablet`
-      font-size: 36px;
+      // font-size: 36px;
       padding: 0 20px 0 40px;
     `};
   }
