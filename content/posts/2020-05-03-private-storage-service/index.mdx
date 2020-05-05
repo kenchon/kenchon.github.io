@@ -1,0 +1,42 @@
+---
+title: Android で NextCloud を運用してみた
+author: Kenya Hondoh
+date: 2020-05-03
+hero: ./images/hero.JPG
+excerpt: Android タブレットでプライベートストレージは運用できるのか？
+---
+
+## TL;DR
+
+- プライベートなストレージサービスを構成して動かしてみたよ
+- Android ＋ Linux エミュレータ ＋ NextCloud
+- *パフォーマンスは微妙*だったよ！
+- 最終的に容量無制限の *Amazon Photos* を使うことに...
+
+## ことのあらまし
+
+#### オンラインストレージサービス
+
+みなさんはオンラインストレージサービスを使っておられますか？ iCloud，Amazon Photos，Google Drive の類です。
+
+自分は手軽さから iCloud の 50GB プラン（100円くらい/月）を使っていたのですが，容量を使い切ったので，とうとう*アレ*を試す時が来たなと直感しました。
+
+アレというのは，オンラインストレージサービスのクライアント・サーバを提供してくれる OSS のことです。これを使えば自宅で自分専用の DropBox 的なものが作れます。
+
+この OSS の代表的なものとして，[NextCloud](https://nextcloud.com) と [ownCloud](https://owncloud.org) というのがあります。
+
+色々比較して NextCloud はプレビュー機能が充実してるぽいことがわかったので，こちらを採用しました。というのも，モバイルデバイスの写真を保管するのが主な目的だったため。
+
+#### Android タブレットをサーバーにする
+
+問題は，サーバーとして使うのに適当そうなマシンが無いことでした。Macbook はスリープしたり電源落とすので不向きだし，ラズパイも無い。
+
+では，この Android タブレットは...？
+
+![](https://unsolublesugar.com/wp/wp-content/uploads/2017/04/IMG_3304-750x451.jpg)
+
+そして，インターネット先生によると，[Android で NextCloud を動かした実績もある模様](https://github.com/jancborchardt/nextcloud-scripts/blob/master/nextcloud-on-android.md)。
+
+## Just Do it
+
+ということで，先人の手順にあやかり，Android に Linux エミュレータを打ち込み，NextCloud のソースコードを clone し，ビルドしてみたところ，普通に動きました。
