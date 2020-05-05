@@ -11,7 +11,7 @@ import mediaqueries from "@styles/media";
 const commonStyles = p => css`
   font-weight: bold;
   color: ${p.theme.colors.primary};
-  font-family: ${p.theme.fonts.serif};
+  font-family: ${p.theme.fonts.sansSerif};
 `;
 
 const h1 = styled.h1`
@@ -40,7 +40,7 @@ const h2 = styled.h2`
   ${commonStyles};
 
   ${mediaqueries.desktop`
-    font-size: 21px;
+    font-size: 24px;
   `};
 
   ${mediaqueries.tablet`
@@ -55,7 +55,7 @@ const h2 = styled.h2`
 
 const h3 = styled.h3`
   word-break: keep-all;
-  font-size: 24px;
+  font-size: 21px;
   line-height: 1.45;
   background:linear-gradient(transparent 90%, #03a1fc 0%); 
   ${commonStyles};
@@ -71,12 +71,12 @@ const h3 = styled.h3`
 
 const h4 = styled.h4`
   word-break: keep-all;
-  font-size: 18px;
-  line-height: 1.45;
+  font-size: 19px;
+  line-height: 3;
   ${commonStyles};
 
   ${mediaqueries.phablet`
-    font-size: 16px;
+    font-size: 19px;
   `};
 `;
 
