@@ -11,7 +11,8 @@ function NotFoundPage() {
       <SEO />
       <Section>
         <div style={{ marginTop: "100px" }}>
-          <Headings.h1>404: Page Not Found</Headings.h1>
+          {/* <Headings.h1>404: Page Not Found</Headings.h1> */}
+          <img src="https://i.imgur.com/h6ecvPa.png" alt="I'm sorry!"></img>
         </div>
       </Section>
     </Layout>
