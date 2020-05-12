@@ -1,37 +1,43 @@
 module.exports = {
   siteMetadata: {
-    title: `Novela by Narative`,
-    name: `Narative`,
-    siteUrl: `https://novela.narative.co`,
-    description: `This is my description that will be used in the meta tags and important for search results`,
+    title: `鑑賞日記`,
+    name: `Kenya Hondoh`,
+    siteUrl: `https://kenmikanmi.github.io`,
+    description: `kenmikanmi の徒然なるままに書き起こしたブログです。`,
     hero: {
-      heading: `Dairy things, Something related to dev, ...`,
+      heading: `観賞日記`,
       maxWidth: 652,
     },
     social: [
       {
         name: `twitter`,
-        url: `https://twitter.com/narative`,
+        url: `https://twitter.com/Earllibrary`,
       },
       {
         name: `github`,
-        url: `https://github.com/narative`,
+        url: `https://github.com/kenmikanmi`,
       },
       {
         name: `instagram`,
-        url: `https://instagram.com/narative.co`,
+        url: `https://instagram.com/ken5526`,
       },
       {
         name: `linkedin`,
-        url: `https://www.linkedin.com/company/narative/`,
+        url: `https://www.linkedin.com/in/kenya-hondoh-2a7067123/`,
       },
-      {
-        name: `dribbble`,
-        url: `https://dribbble.com/narativestudio`,
-      },
+      // {
+      //   name: `dribbble`,
+      //   url: `https://dribbble.com/narativestudio`,
+      // },
     ],
   },
   plugins: [
+    {
+      resolve: "gatsby-plugin-google-analytics",
+      options: {
+        trackingId: `UA-156100961-1`
+      }
+    },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -64,8 +70,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Novela by Narative`,
-        short_name: `Novela`,
+        name: `kenmikanmi's blog`,
+        short_name: `kenmikanmi`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#fff`,
