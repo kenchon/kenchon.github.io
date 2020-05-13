@@ -36,5 +36,5 @@ jobs:
       with:
         working-directory: /
         build: yarn run build
-        start: yarn run cypress
+        start: yarn dev && yarn run cypress
         wait-on: 'http://localhost:8000'
