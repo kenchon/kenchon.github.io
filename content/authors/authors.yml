@@ -1,9 +1,11 @@
 - name: Kenya Hondoh
   bio: |- 
-    フロントエンド開発を 1mm くらいやってたついでにブログを開設。
+    Japanese Traditional Company で AI 的な何かをクラウドで提供するサービスの
+    開発・運用をやっている。一瞬(4ヶ月ほど)フロントエンド開発をやったのをきっかけに
+    ブログを開設。最近は DX 関連の怪しい話や，組織づくりなどにも興味を持ち始める。
   avatar: ./avatars/kenya_hondoh.jpg
   social:
     - url: https://github.com/kenmikanmi
     - url: https://twitter.com/Earllibrary
-    # - url: https://qiita.com/kenmikamin
+    # - url: https://qiita.com/kenmikanmi
   featured: true
