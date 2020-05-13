@@ -17,7 +17,7 @@ const commonStyles = p => css`
 const h1 = styled.h1`
   word-break: keep-all;
   font-size: 52px;
-  line-height: 1.15;
+  line-height: 1.2;
   
   ${commonStyles};
 
@@ -57,7 +57,7 @@ const h3 = styled.h3`
   word-break: keep-all;
   font-size: 21px;
   line-height: 1.45;
-  background:linear-gradient(transparent 90%, #03a1fc 0%); 
+  background:linear-gradient(transparent 90%, #03a1fc 0%);
   ${commonStyles};
 
   ${mediaqueries.tablet`

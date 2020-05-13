@@ -11,7 +11,7 @@ const UnorderedList = styled.ul`
   margin: 0 auto;
   font-size: 18px;
   width: 100%;
-  max-width: 680px;
+  max-width: 780px;
 
   ${mediaqueries.desktop`
     max-width: 507px;

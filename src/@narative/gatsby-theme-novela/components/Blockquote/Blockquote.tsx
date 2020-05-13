@@ -7,7 +7,7 @@ const Blockquote = styled.blockquote`
   color: ${p => p.theme.colors.articleText};
   font-family: ${p => p.theme.fonts.serif};
   // font-size: ${p => p.theme.fonts.size};
-  font-weight: 0;
+  font-weight: normal;
 
   padding: 30px 30px 30px 30px;
   // font-style: italic;
@@ -28,7 +28,8 @@ const Blockquote = styled.blockquote`
     width: 100%;
     margin: 0 auto;
     // font-size: 36px;
-    line-height: 1.75; // 行間の幅
+    // line-height: 1.75; // 行間の幅
+    font-weight: normal;
 
     ${mediaqueries.tablet`
       // font-size: 26px;

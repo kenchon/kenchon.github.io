@@ -69,13 +69,13 @@ export default MDX;
 
 const IMAGE_WIDTHS = {
   regular: "680px",
-  large: "1004px",
+  large: "580px",
   full: "100vw"
 };
 
 const ARTICLE_WIDTH = css`
   width: 100%;
-  max-width: 680px;
+  max-width: 780px;
 
   ${mediaqueries.desktop`
     max-width: 507px;
