@@ -1,22 +1,130 @@
 ---
-title: Android で NextCloud を運用する
+title: Android でプライベートストレージを運用する
 author: Kenya Hondoh
 date: 2020-05-03
 hero: ./images/hero.JPG
-excerpt: Android タブレットでプライベートストレージは運用できるのか？
+excerpt: 退屈なことは Android に任せよう
 ---
 
-## TL;DR
+> リーンな考え方における価値とは顧客にとってのメリットを提供するものを指し，
+それ以外はすべて無駄だ - Eric Ries
 
-- おうちストレージサービスを，Android をサーバーにして使ってみたよ
-- 構成は，Android ＋ Linux エミュレータ ＋ NextCloud
-- *パフォーマンスは微妙*だったよ！
-- 最終的に容量無制限の *Amazon Photos* を使うことにしたよ！
+今日も無駄をやっていきたいと思います。
 
-結果，こんな感じで画像のアップロードとかダウンロードとかできます。
-（左：クライアント画面，右：サーバー）
-![](./images/demo.jpeg)
+## 経緯はいい，結論を教えてくれ
 
+- iCloud の容量使い切ったから，ストレージサービスを自宅で動かしてみた
+- *NextCloud* (乱暴に言えば OSS の Dropbox)を，Android タブレットをサーバーとして動かした
+- ↓ こんな感じで，iPhone や PC から写真のアップロードとかダウンロードとかできる
+
+>![](./images/demo.jpeg)
+>左：クライアント操作画面，右：サーバー・Android タブレット
+
+- *パフォーマンスは微妙*だった
+- Amazon Photos はいいぞ
+
+## 構成
+- _Android_ - HUAWEI MediaPad M5 lite 8 (CPU: [Kirin 710](https://reameizu.com/annouced-hisilicon-kirin710-by-huawei/)，RAM: 3GB，ストレージ: 128GB) 
+- _Termux_ - Android 端末上で動く，Linux 仮想環境
+- _NextCloud_ - オンラインストレージサービスを提供するための OSS
+
+## 手順
+#### 1. Termux をインストールする
+👉 [Google Play - Termux](https://play.google.com/store/apps/details?id=com.termux&hl=ja)
+
+Termux は Android 端末上で Linux 仮想環境を用意してくれるアプリです。
+こんな小さなタブレットが開発環境になるのはプチ感動です。
+
+（最近は開発環境 on クラウドの流れがきていますが c.f. 
+ [GitHub Codespaces](https://www.publickey1.jp/blog/20/githubwebidecodespacesgithub.html)）
+
+#### 2. Termux から Android へのリソースアクセスを許可する
+
+Termux を起動し，コマンド： `termux-setup-storage` を実行。
+すると，`home` ディレクトリ直下に `storage` というディレクトリが生成されます。
+```bash
+$ termux-setup-storage
+$ cd ~
+$ ls
+storage
+```
+SD カードを挿している場合， `storage` 直下に `external-*` というディレクトリが見えます。
+
+#### 3. NextCloud を実行するのに必要なパッケージをインストールする
+```bash
+pkg install php php-fpm sqlite coreutils openssl-tool
+```
+
+#### 4. NextCloud のソースコードを clone する
+適当なディレクトリで，NextCloud のソースコードを引っ張ってきます：
+```bash
+git clone https://github.com/nextcloud/server.git nextcloud
+```
+次に，サードパーティライブラリを引っ張ってきます：
+```bash
+$ cd nextcloud
+$ git submodule update --init
+```
+#### 5. サービス実行
+
+サービスを起動します。その前に，おうちの LAN から サービスにアクセスするために，
+Android に割り当てられているローカルIPをメモっておきましょう。
+```bash
+$ ifconfig | grep 192.168.*
+       inet 192.168.2.111  netmask 255.255.255.0  broadcast 192.168.2.255
+            # ↑これ
+```
+
+それではいよいよ起動です〜。
+```bash
+php -S 0.0.0.0:8080 -t ./
+```
+↑ オプション `-t` で，ストレージとして使うパスを指定できるぽいです。SDカードを使う場合はさっきのパスを指定します。
+
+するとなんかログが流れてきましたね，拙者興奮してきました。
+
+#### 6. 簡易テスト
+目的は iPhone の写真をごっそり移管することだったので，
+iPhone に NextCloud のクライアントアプリを落とします。App Store から頑張って探します。
+
+サーバーの IP を聞かれたら，さっきメモった IP とポート番号を入れます。
+
+例：`http://192.168.2.111:8080`
+
+初回はアクセス時は管理ユーザ名とパスワードとか入力してやる必要があります。
+
+そしたら，いけましたね？？？普通に使えましたね？？？？？すご〜い。
+
+## 使ってみた感触
+- *アップロード速度は 2~3 MB/sec くらい*。
+
+悪く無い。ただ，iPhone の仕様上バックグラウンドでの
+アップロードができんらしいので，アプリを開きっぱなしにしないとアップロードが止まる。せむかたなし。
+
+- *クソでかい動画（1GB 以上）アップロード不可*。
+
+完了する前に サーバー側で「タイムアウトしたぞ」みたいなメッセージが出て落ちた。
+処理を中断するとかではなくサービスが死ぬのはどうなんだと思うが，多分ソースコードから
+タイムアウトの閾値っぽいものをいじればどうにかなる。
+
+- *プレビューがイマイチ*。
+
+ブラウザから `http://{endpoint}:8080` にアクセスして使うこともできるのだが，
+写真のサムネイルは表示されるものの，ちょっと拡大して見たりできない。ちと残念。
+
+- *レスポンスがチョット遅い*。
+
+まあでもエントリーモデルの Android タブレットであることを考慮すればこんなものだとも思う。
+
+こんな感じでした。
+
+のちに Amazon Photos という容量無制限の画像用のオンラインストレージがあることを知り，Amazon Primer だったので素直にこちらを使うことにしました。ぴえん (T_T)
+
+## まとめ
+
+ロマンがあるぞ
+
+<!--
 ## ことのあらまし
 
 #### オンラインストレージサービス
@@ -41,6 +149,4 @@ excerpt: Android タブレットでプライベートストレージは運用で
 
 そして，インターネット先生によると，[Android で NextCloud を動かした実績もある模様](https://github.com/jancborchardt/nextcloud-scripts/blob/master/nextcloud-on-android.md)。
 
-## Just Do it
-
-ということで，先人の手順にあやかり，Android に Linux エミュレータを打ち込み，NextCloud のソースコードを clone し，ビルドしてみたところ，普通に動きました。
+-->
