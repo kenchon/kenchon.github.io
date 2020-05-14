@@ -6,7 +6,7 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [ master, develop ]
   pull_request:
     branches: [ master ]
 
@@ -34,7 +34,5 @@ jobs:
     - name: Cypress.io
       uses: cypress-io/github-action@v1.16.1
       with:
-        working-directory: /
-        build: yarn run build
         start: yarn dev
         wait-on: 'http://localhost:8000'
