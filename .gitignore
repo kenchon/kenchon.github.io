@@ -72,3 +72,6 @@ yarn-error.log
 
 # Drafts
 content/drafts/
+
+# Test Artifacts
+*.mp4
