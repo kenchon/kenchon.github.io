@@ -8,6 +8,6 @@ context('Actions', () => {
   // トップのアイコンをクリックすると，トップページにいく。
   it('click icon of the top left to visit toppage', () => {
     cy.get('a[href="/"]').click()
-    cy.url().should('match', /\/blog$/)
+    cy.url().should('match', /\/$/)
   })
 })

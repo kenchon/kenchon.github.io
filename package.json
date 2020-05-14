@@ -8,7 +8,7 @@
     "dev": "rm -rf .cache && gatsby develop --host=0.0.0.0",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public -b gh-pages",
     "clean": "gatsby clean",
-    "test": "yarn run cypress"
+    "test": "yarn cypress run"
   },
   "dependencies": {
     "@lekoarts/gatsby-theme-specimens": "^2.1.1",
