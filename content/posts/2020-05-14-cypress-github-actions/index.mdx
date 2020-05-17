@@ -1,0 +1,74 @@
+---
+title: GitHub Actions ＋ Cypress.io でこのブログを CI する
+author: Kenya Hondoh
+date: 2020-05-14
+hero: ./images/cypress.jpg
+excerpt: excerpt
+---
+
+<!-- ![](https://lh3.googleusercontent.com/s8fY5QbR1GIi_4n1N3ePqmaq81FmNPD_lUiMv5piMdAxgg3WTUyRBZTGpAIEo5gphDeJy0E-Fqg24nvkGEVN9ZLcfwZXXPTGm81ZmnBMh4Idq7wbH0EzNsVEvGh9oE5Vmw5GjIbnID4) -->
+
+# TL;DR - またの名を，概要
+GitHub Actions っていうのが実質無料らしいから，このブログの e2e テストを 
+Cypress.io さんにお願いしてもらうことにした。
+
+~~てかこのブログごときにテストいるか？~~
+
+# 経緯
+- GitHub Actions って（ある制約つきで）個人でも無料で使えるんやね〜へ〜。
+- Cypress.io（Web のテストフレームワーク）の公式ワークフローもあってなんか簡単に e2e テストとかできるんやね〜へ〜
+- そう言えばこのブログ，ちゃんとデプロイできたか*デプロイ毎に手動でチェック*してるんよな〜（ちなみに 1mm も手間じゃない） 🤔
+
+# やったこと
+#### GitHub Actions を有効にする
+GUI でぽちぽちやっていったら，リポジトリに `.github/workflow/*.yml` 
+というワークフロー定義が生成されます。ここに書いていきます。
+
+いろいろやって思ったのですが，ワークフローをいじるときは，個人でも作業用のブランチ
+切ったほうがいいです。commit & push しないとパイプラインでの動作確認ができないので，
+ `master` で作業するとめっちゃコミットが残ります。
+ 作業用ブランチで色々試して squash merge したほうがよいです。
+
+>![](https://lh3.googleusercontent.com/MPZbfyZhnXjfe4fuPzLwQ3s_VjBo0k41rYvyPAFbQRwL44e0Q6iH8-cvw2Ldy8AbaorsdFYt0Kiq3kPQ2v4ruJSyqmXlB9zmq3Utll35FbN_2CP95nYNlm7HtWdsROC-P6xpn-Yew88)
+>　　密林
+
+#### Cypress.io のワークフローを記述する
+ワークフローの記述も GUI でできます。作成後 commit & run をそのままボタンぽちぽちでできて
+この開発体験はなかなかいい感じです。
+
+>![](https://lh3.googleusercontent.com/MPWYyv_ZLrDxy16xD_ORZGvLm85E0ZvCmn0rFdK-Qyj0ITlfWlQk4mTe8eWtZVe3zvGnrtrLeowL4xpCX4i9JN_en8ePiNuS2CrhKUjx-4WpZ2pIMTP7RivPjoMmoMFBNBpRMETmkiU)
+>最高な開発体験の様子
+
+それで，自分の yarn プロジェクトにおける cypress.io のジョブ定義は下記のような感じです。
+
+```yml
+# Cypress-based e2e test
+- name: Cypress.io
+    uses: cypress-io/github-action@v1.16.1
+    with:
+        start: yarn dev
+        wait-on: 'http://localhost:8000'
+        wait-on-timeout: 400 # ⭐️：これのせいで大変だった
+```
+
+超シンプルです。 簡単に説明すると，
+
+- `yarn dev` (npm run) して Gatsby アプリケーション（静的サイト）を立ち上げる
+- テスト対象のエンドポイント `http://localhost:8000` を待つ
+
+という感じです。このあと，`yarn cypress run` 相当のこと（すなわちテスト）が実行されます。
+
+1点ハマったのが，`localhost:8000` にアクセスできねーぞ！と怒られまくった点です。
+原因は，`yarn dev` してもアプリが立ち上がるのに 140 秒くらいかかっていたためでした。
+`wait-on` の timeout 閾値がデフォルトで 60 秒なので，
+「60 秒待ったがまだサービス立ち上がってねーぞ！」となんども治安の悪い声（赤文字）で
+怒ってきます。そこで，`wait-on-timeout` で明示的に閾値を指定しましょう。
+
+#### README.md にバッチを貼る
+やってみたかったんすよねこれｗ
+
+ということでこのブログにも貼り付けます↓
+
+![CI](https://github.com/kenmikanmi/blog/workflows/CI/badge.svg)
+
+また何かあったら更新します。
