@@ -9,7 +9,7 @@
     "deploy": "gatsby build --prefix-paths && gh-pages -d public -b gh-pages",
     "clean": "gatsby clean",
     "test": "yarn cypress run",
-    "template": "cp -r content/drafts/2020-00-00-title content/posts/ && cd content/posts/2020-00-00-title"
+    "template": "cp -r content/drafts/2020-00-00-title content/posts/$(date +%Y-%m-%d)-title && cd content/posts/$(date +%Y-%m-%d)-title"
   },
   "dependencies": {
     "@lekoarts/gatsby-theme-specimens": "^2.1.1",
