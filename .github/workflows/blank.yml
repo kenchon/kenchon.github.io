@@ -33,7 +33,14 @@ jobs:
         wait-on-timeout: 400 # Timeout threshold should be > 240 sec because 'yarn dev' stuck
 
     - name: Deploy Website to GitHub Pages
-      run: yarn deploy
+      env:
+        GIT_ADDRESS: ${{ secrets.GIT_ADDRESS }}
+        GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+      run: |
+        git config --global user.email ${GIT_ADDRESS}
+        git config --global user.name ${GIT_USERNAME}
+        git remote set-url origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        yarn deploy
     
     # TODO: Replace hard-coded production URL
     - name: Replace baseUrl to Production Path
