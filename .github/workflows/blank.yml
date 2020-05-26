@@ -39,7 +39,7 @@ jobs:
       run: |
         git config --global user.email ${GIT_ADDRESS}
         git config --global user.name ${GIT_USERNAME}
-        git remote set-url origin https://${ secrets.GIT_USERNAME }:${{ secrets.GIT_SECRETS }}@github.com/kenmikanmi/blog
+        git remote set-url origin https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_SECRETS }}@github.com/kenmikanmi/blog
         yarn deploy
     
     # TODO: Replace hard-coded production URL
