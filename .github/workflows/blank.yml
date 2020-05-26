@@ -43,9 +43,9 @@ jobs:
         yarn deploy
     
     # TODO: Replace hard-coded production URL
-    - name: Replace baseUrl to Production Path
-      run: |
-        sed -i -e 's|"baseUrl": \(.*\)|"baseUrl": "https://kenmikanmi.github.io/blog"|g' cypress.json
+    # - name: Replace baseUrl to Production Path
+    #   run: |
+    #     sed -i -e 's|"baseUrl": \(.*\)|"baseUrl": "https://kenmikanmi.github.io/blog"|g' cypress.json
 
-    - name: Check if the Deployed page is accessible.
-      uses: cypress-io/github-action@v1.16.1
+    # - name: Check if the Deployed page is accessible.
+    #   uses: cypress-io/github-action@v1.16.1
