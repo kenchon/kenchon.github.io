@@ -2,12 +2,12 @@
 
 context('Actions', () => {
   beforeEach(() => {
-    cy.visit('/')
+    cy.visit('/blog')
   })
 
   // トップのアイコンをクリックすると，トップページにいく。
-  it('click icon of the top left to visit toppage', () => {
-    cy.get('a[href="/"]').click()
+  it('Click icon of the top left to visit toppage', () => {
+    cy.get('a[href="/blog"]').click()
     cy.url().should('match', /\/$/)
   })
 })

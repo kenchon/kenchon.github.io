@@ -33,6 +33,12 @@ module.exports = {
     ],
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://kenmikanmi.github.io/blog`,
+      }
+    },
     'gatsby-plugin-sitemap',
     {
       resolve: "gatsby-plugin-google-analytics",
@@ -61,7 +67,7 @@ module.exports = {
       options: {
         contentPosts: "content/posts",
         contentAuthors: "content/authors",
-        basePath: "/",
+        basePath: "/blog",
         authorsPage: true,
         sources: {
           local: true,
