@@ -326,6 +326,13 @@ const MDXBody = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  // TODO: Declare 'code' style to appropriate position
+  & code {
+      background-color: #eee;
+      color: #333;
+      padding: 0.1em 0.4em;
+    }
+  }
 
   ${HeadingsCSS}
   ${PrismCSS}
