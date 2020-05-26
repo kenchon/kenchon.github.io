@@ -6511,6 +6511,13 @@ gatsby-paginate@^1.1.0:
   dependencies:
     path "^0.12.7"
 
+gatsby-plugin-canonical-urls@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-canonical-urls/-/gatsby-plugin-canonical-urls-2.3.2.tgz#b5c99d9faec74732733a478ef4cf01fd94ad059f"
+  integrity sha512-Yb6jVLPi7v6kuJb+7m8Tl2n/MRnWfQZfufjSYDzRCCIO4RBheb+qpwzGCUBwVXZViHjxxG7hCj2KrfJAtiPvCA==
+  dependencies:
+    "@babel/runtime" "^7.9.6"
+
 gatsby-plugin-emotion@^4.1.2:
   version "4.1.22"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-emotion/-/gatsby-plugin-emotion-4.1.22.tgz#e153debef74afa205336738dcf1988c95b308c4f"
