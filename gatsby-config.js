@@ -1,12 +1,12 @@
 module.exports = {
   pathPrefix: "/blog",
   siteMetadata: {
-    title: `鑑賞日記`,
+    title: `観照日記`,
     name: `Kenya Hondoh`,
-    siteUrl: `https://kenmikanmi.github.io`,
+    siteUrl: `https://kenmikanmi.github.io/blog`,
     description: `kenmikanmi の徒然なるままに書き起こしたブログです。`,
     hero: {
-      heading: `観賞日記`,
+      heading: `観照日記`,
       maxWidth: 652,
     },
     social: [
