@@ -20,7 +20,7 @@ export default {
   horizontalRule: "rgba(8, 8, 11, 0.15)",
   inputBackground: "rgba(0, 0, 0, 0.05)",
   list: "#002575",
-  quoteBackground: "#f2f2f2",
+  quoteBackground: "#fff1c9",
   underline: "#ff99ab",
   modes: {
     dark: {
