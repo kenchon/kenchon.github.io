@@ -27,12 +27,12 @@ const commonAlertStyles = {
   gridColumnGap: theme.space[3],
   alignItems: `center`,
   fontSize: theme.fontSizes[1],
-  maxWidth: `700px`,
-  margin: `10px`,
+  maxWidth: `780px`,
+  margin: `auto`,
   fontSize: `18px`,
   svg: {
-    width: theme.sizes[`8`],
-    height: theme.sizes[`8`],
+    width: theme.sizes[`10`],
+    height: theme.sizes[`10`],
     ".primary": {
       fill: `currentColor`,
     },
