@@ -87,7 +87,7 @@ const BioAvatarInner = styled.div`
 `;
 
 const BioName = styled.p`
-  max-width: 430px;
+  max-width: 600px;
   font-size: 25px;
   line-height: 1.45;
   font-weight: 800;
@@ -96,7 +96,7 @@ const BioName = styled.p`
 `;
 
 const BioText = styled.p`
-  max-width: 430px;
+  max-width: 600px;
   font-size: 14px;
   line-height: 1.45;
   color: ${p => p.theme.colors.grey};
