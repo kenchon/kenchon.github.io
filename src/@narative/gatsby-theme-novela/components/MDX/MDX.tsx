@@ -22,7 +22,10 @@ import Emphasis from "../Emphasis";
 import mediaqueries from "@styles/media";
 import { toKebabCase } from "@utils";
 
+import { Alert } from "@lekoarts/gatsby-theme-specimens"
+
 const components = {
+  Alert: Alert,
   img: ImageZoom,
   a: Anchor,
   blockquote: Blockquote,
@@ -333,6 +336,7 @@ const MDXBody = styled.div`
       padding: 0.1em 0.4em;
     }
   }
+  margin: 10px;
 
   ${HeadingsCSS}
   ${PrismCSS}
