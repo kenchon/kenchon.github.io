@@ -21,6 +21,7 @@ export default {
   inputBackground: "rgba(0, 0, 0, 0.05)",
   list: "#002575",
   quoteBackground: "#fff1c9",
+  quoteBorder: "#99e2ff",
   underline: "#ff99ab",
   modes: {
     dark: {
@@ -42,7 +43,8 @@ export default {
       horizontalRule: "rgba(255, 255, 255, 0.15)",
       inputBackground: "rgba(255, 255, 255, 0.07)",
       list: "#4dc3ff",
-      quoteBackground: "#636363",
+      quoteBackground: "#002c69",
+      quoteBorder: "#99fcff",
       underline: "#243dff",
     },
   },

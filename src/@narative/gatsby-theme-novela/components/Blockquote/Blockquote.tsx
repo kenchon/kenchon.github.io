@@ -11,13 +11,13 @@ const Blockquote = styled.blockquote`
   padding: 30px 30px 30px 30px;
   // font-style: italic;
   // 背景色が dark/light で切り替わるように設定
-  background-color: #fff1c9;
+  background-color: ${p => p.theme.colors.quoteBackground};
   foreground-color: black;
   border-radius: 10px;
   border: solid;
   padding-top: 1em;
   padding-bottom: 1em;
-  border-color: orange;
+  border-color: ${p => p.theme.colors.quoteBorder};
   color: black;
 
   ${mediaqueries.tablet`
@@ -27,16 +27,16 @@ const Blockquote = styled.blockquote`
     font-weight: 600;
     text-align: left;
     padding: 0;
-    color: black;
+    // color: black;
   }
 
   & > ol {
     padding-left: 20px;
-    color: black;
+    // color: black;
   }
 
   & > li {
-    color: #000000;
+    // color: #000000;
   }
 
   & > p {
@@ -49,7 +49,7 @@ const Blockquote = styled.blockquote`
     // font-size: 36px;
     // line-height: 1.75; // 行間の幅
     font-weight: normal;
-    color: black;
+    // color: black;
 
     ${mediaqueries.tablet`
     `};
