@@ -1,25 +1,49 @@
 ---
 title: Hello, World!
 author: Kenya Hondoh
-date: 2019-01-12
+date: 2020-01-12
 hero: ./images/pretty-cat.jpg
 excerpt: はじめての投稿。
 ---
 
 ## Hello, World!
 
-こんにちは，ブログを開設してみました。
+ブログを開設してみたよ。
 
-## Blog開設のきっかけ
-
-社でフロントエンド開発を 1mm くらいやってたので，ブログをやっていくことにした。
+## ブログ開設のきっかけ
 
 Microsoft Ignite 2019 のあるセッションで，
-*[GatsbyJS](https://www.gatsbyjs.org/)* + *GitHub Pages* + *CMS* で *JamStack* するといいぞい
-みたいな話がチョロっとあった。雰囲気で完全に理解し，
-早速，[Narative Novela](https://github.com/narative/gatsby-theme-novela) という
- GatsbyJS 製のブログテンプレート（テーマ）を拝借してブログを作成した。
- 
-もののコマンド数発で Web ページがデプロイできてしまうのですごい。
+「[GatsbyJS](https://www.gatsbyjs.org/) で *JamStack* するといいぞい」
+みたいな話をチョロっと聞いて雰囲気で完全に理解してしまったので，
+ドキュメント読みながら静的ウェブページ（つまりブログ）を構築してみました。
 
-ということでよろしくお願いします m(_ _)m
+## 何を使ってるのか
+
+- *フレームワーク*
+
+  Gatsby という React 製フレームワーク。Web フロントエンド開発のベストプラクティスが詰まっているらしい（[※](https://tsukamon.com/blogs/3)）
+
+  Gatsby には「テーマ」という概念があり，人が作ったテンプレートを npm パッケージとしてインストールして拡張できます。
+私のこのウェブページは，そのテーマのひとつである [Narative Novela](https://github.com/narative/gatsby-theme-novela) 
+というテーマのスタイルをカスタマイズしてます。
+
+- *記事の管理*
+
+  記事の管理は Git で行っていますが，将来的には Contentful などの CMS に置き換えていきたいと思ってます。
+  構成上，同一リポジトリにコンテンツとソースコードがあるのが何か気持ち悪いからです。
+
+  また，記事のマークアップには MDX というのを使っています。Markdown を拡張したやつで，
+  React コンポーネントを `import` して使うことができるという特徴を持っています。
+
+- *ウェブサイトのホスティング*
+
+  GitHub Pages を使っています。
+
+- *CI/CD*
+
+  自動テスト・自動デプロイ のワークフローを GitHub Actions で記述しています。テストには Cypress.io という
+  テスティングフレームワークを使っています。
+　
+  👉　[関連記事: GitHub Actions ＋ Cypress.io でこのブログを CI する](/GitHub-Actions-Cypress.io-CI/)
+
+## 

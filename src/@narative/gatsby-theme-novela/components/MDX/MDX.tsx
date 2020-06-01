@@ -333,6 +333,7 @@ const MDXBody = styled.div`
   & code {
       background-color: ${p => p.theme.colors.codeBackground };
       color: ${p => p.theme.colors.codeFontColor };
+      font-family: ${p=> p.theme.fonts.monospace };
       padding: 0.1em 0.2em;
       border-radius: 5px;
     }
