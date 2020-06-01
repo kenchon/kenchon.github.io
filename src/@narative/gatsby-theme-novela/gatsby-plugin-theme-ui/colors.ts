@@ -21,8 +21,10 @@ export default {
   inputBackground: "rgba(0, 0, 0, 0.05)",
   list: "#002575",
   quoteBackground: "#fff1c9",
-  quoteBorder: "#99e2ff",
-  underline: "#ff99ab",
+  quoteBorder: "#ffbb33",
+  underline: "#ffbaa1",
+  codeBackground: "#ebebeb",
+  codeFontColor: "#333",
   modes: {
     dark: {
       grey: "#73737D",
@@ -45,7 +47,9 @@ export default {
       list: "#4dc3ff",
       quoteBackground: "#002c69",
       quoteBorder: "#99fcff",
-      underline: "#243dff",
+      underline: "#ffbaa1",
+      codeBackground: "#333",
+      codeFontColor: "#ebebeb",
     },
   },
 };

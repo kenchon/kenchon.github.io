@@ -331,9 +331,10 @@ const MDXBody = styled.div`
   flex-direction: column;
   // TODO: Declare 'code' style to appropriate position
   & code {
-      background-color: #eee;
-      color: #333;
-      padding: 0.1em 0.4em;
+      background-color: ${p => p.theme.colors.codeBackground };
+      color: ${p => p.theme.colors.codeFontColor };
+      padding: 0.1em 0.2em;
+      border-radius: 5px;
     }
   }
   margin: 10px;
