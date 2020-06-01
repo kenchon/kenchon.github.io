@@ -1,0 +1,49 @@
+---
+title: ブログ運営と収益化について真面目に考えた 2 - Moneytize the blog Part2
+author: Kenya Hondoh
+date: 2019-05-18
+hero: https://1.bp.blogspot.com/-Q9jOqnVqGuo/W64DqXTxwfI/AAAAAAABPIk/mn0XoaVlL2s_Sphqb-5WielV75A6JIEowCLcBGAs/s800/job_yarigai_sausyu.png
+excerpt: 今後の戦略
+---
+
+## 概要
+なんか試行錯誤するだけじゃアクセス数増えんだろうということで，
+巷でいうところの SEO 対策の一部をやった。
+
+## やれるだけやったこと
+### Google Analytics
+Gatsby のプラグイン [`gatsby-plugin-google-analytics`](https://www.npmjs.com/package/gatsby-plugin-google-analytics) をインストールして `gatsby-config.js` に
+トラッキング ID をカキコするだけ。楽ちん！！
+
+これやると，どこの県からアクセス来たとか見れて面白い。ただ，残念ながらこのブログは現時点では自分以外の誰も
+見てないので，Yokohama から同一のユーザがめっちゃアクセスしている感じのレポートが生成されている。悲しみ。
+
+### Google Search Console
+#### 有効化
+Google Search Console っていう，ウェブページが検索されやすいようにサポートしてくれるツールがある。
+
+これを使うと，「何人のユーザーがどんなキーワードを調べて，そのうち何人が自分のページにアクセスしてくれたのか」
+とか，結構面白い結果が見れる。残念ながらこの `github.io` のページはまだ Google の検索エンジンにインデックスされていないので見れない。
+
+で，これを有効化するためには，Google Search Console の最初の画面でトークンを発行して，
+そのトークンを含んだ html ファイルをウェブページにおくことで「あ，確かにこのページはあなたのモノですね」っていう認証をしなくちゃいけない。
+
+今見れるこのブログは，デプロイ用のブランチに全てのソースコードが置いてあるので，そのルートディレクトリに
+トークンを含んだ html ファイルを置く。そうすると，Google Search Console 君が認証してくれる。
+
+#### PageSpeed Insights
+
+ウェブページがどれだけ高速なのか検証してくれる機能がプレビュー版でリリースされている。
+
+やってみたところ，以下のような結果になった。良好っぽい。
+
+![PageSpeed Insights](https://lh3.googleusercontent.com/UgDFCWqTfuJBOkYvtJvBw7shVFfH8Yp_vPuTthz5R6rEob3X5urtY7DscbBLSAVyH1c3sQiKd6yYm1TXVIxc1JIPcOCdqzSbso_ACFkl9THmazOZZmLDPoPxruJseT5bCneBGJofuq4=w2400)
+
+モバイル版ではスコアは 87 だった。詳細を見ると，「第三者コード」によってページの読み込みが遅くなってるらしい。
+
+![第三者コード](https://lh3.googleusercontent.com/7nb5meDT9alHEq-joB6eTF4670GUMoC68PQvaWuwX58BXI-YJqXUjGAMnstNVmWyTovIc4rkH4ey1m2LdKmgOAu7EmMYh-y5u0BZo6oseQNCbyHCGkewDSrsaZR2DODddC0mQdtwcSY=w2400)
+
+539 ms もブラウザを支配してる Github とかいう人物マジで許せん。
+
+## 今後の戦略
+ちょっと色々書きたいがまた後日書く。

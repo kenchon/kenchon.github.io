@@ -22,7 +22,10 @@ import Emphasis from "../Emphasis";
 import mediaqueries from "@styles/media";
 import { toKebabCase } from "@utils";
 
+import { Alert } from "@lekoarts/gatsby-theme-specimens"
+
 const components = {
+  Alert: Alert,
   img: ImageZoom,
   a: Anchor,
   blockquote: Blockquote,
@@ -326,6 +329,16 @@ const MDXBody = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  // TODO: Declare 'code' style to appropriate position
+  & code {
+      background-color: ${p => p.theme.colors.codeBackground };
+      color: ${p => p.theme.colors.codeFontColor };
+      font-family: ${p=> p.theme.fonts.monospace };
+      padding: 0.1em 0.2em;
+      border-radius: 5px;
+    }
+  }
+  margin: 10px;
 
   ${HeadingsCSS}
   ${PrismCSS}

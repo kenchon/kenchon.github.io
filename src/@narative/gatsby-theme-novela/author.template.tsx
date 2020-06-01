@@ -22,14 +22,14 @@ const ArticlesPage: Template = ({ location, pageContext }) => {
         title={author.name}
         description={author.bio}
       />
-      {/* <Section narrow>
+      <Section narrow>
         <AuthorHero author={author} />
         <AuthorArticles articles={articles} />
         <AuthorPaginator>
           <Paginator {...pageContext} />
         </AuthorPaginator>
-      </Section> */}
-      {/* <AuthorsGradient /> */}
+      </Section>
+      <AuthorsGradient />
     </Layout>
   );
 }
@@ -49,5 +49,5 @@ const AuthorsGradient = styled.div`
 `;
 
 const AuthorPaginator = styled.div`
-  text-align: center;
+  text-align: left;
 `;

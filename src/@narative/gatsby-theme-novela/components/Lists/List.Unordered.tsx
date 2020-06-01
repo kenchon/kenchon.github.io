@@ -15,7 +15,7 @@ const UnorderedList = styled.ul`
 
   ${mediaqueries.desktop`
     max-width: 507px;
-  `}
+  `};
 
   ${mediaqueries.tablet`
     max-width: 486px;
@@ -23,7 +23,7 @@ const UnorderedList = styled.ul`
   `};
 
   ${mediaqueries.phablet`
-    padding-left: 20px;
+    padding-left: 0px;
   `};
 
   li {
@@ -42,19 +42,18 @@ const UnorderedList = styled.ul`
       ${mediaqueries.tablet`
         padding: 0;
       `};
-    }
-  }
 
-  li > :not(ol, ul) {
-    display: inline;
-  }
+      ${mediaqueries.phablet`
+        padding: 0;
+      `};
+    };
+  };
 
-  li::before {
-    width: 3rem;
-    display: inline-block;
-    position: absolute;
-    color: ${p => p.theme.colors.articleText};
-  }
+  // Removing this make it possible to make newline b/w <p> tags.
+  // li > :not(ol, ul) {
+  //   display: inline;
+  // };
+
 
   li::before {
     content: '';
@@ -70,7 +69,11 @@ const UnorderedList = styled.ul`
     ${mediaqueries.tablet`
       left: 0;
     `};
-  }
+
+    ${mediaqueries.phablet`
+      left: 0;
+    `};
+  };
 `;
 
 export default UnorderedList;

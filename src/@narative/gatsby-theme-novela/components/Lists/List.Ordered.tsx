@@ -43,18 +43,23 @@ const OrderedList = styled.ol`
       ${mediaqueries.tablet`
         padding: 0;
       `};
+
+      ${mediaqueries.phablet`
+      padding: 0;
+      `};
     }
   }
 
-  li > :not(ol, ul) {
-    display: inline;
-  }
+  // Removing this make it possible to make newline b/w <p> tags.
+  // li > :not(ol, ul) {
+  //   display: inline;
+  // }
 
   li::before {
     width: 3rem;
     display: inline-block;
     position: absolute;
-    color: ${p => p.theme.colors.articleText};
+    // color: ${p => p.theme.colors.articleText};
   }
 
   li::before {

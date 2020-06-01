@@ -70,8 +70,5 @@ yarn-error.log
 
 .netlify/
 
-# Drafts
-content/drafts/
-
 # Test Artifacts
 *.mp4

@@ -20,8 +20,11 @@ export default {
   horizontalRule: "rgba(8, 8, 11, 0.15)",
   inputBackground: "rgba(0, 0, 0, 0.05)",
   list: "#002575",
-  quoteBackground: "#f2f2f2",
-  underline: "#ff99ab",
+  quoteBackground: "#fff1c9",
+  quoteBorder: "#ffbb33",
+  underline: "#ffbaa1",
+  codeBackground: "#ebebeb",
+  codeFontColor: "#333",
   modes: {
     dark: {
       grey: "#73737D",
@@ -42,8 +45,11 @@ export default {
       horizontalRule: "rgba(255, 255, 255, 0.15)",
       inputBackground: "rgba(255, 255, 255, 0.07)",
       list: "#4dc3ff",
-      quoteBackground: "#636363",
-      underline: "#243dff",
+      quoteBackground: "#002c69",
+      quoteBorder: "#99fcff",
+      underline: "#ffbaa1",
+      codeBackground: "#333",
+      codeFontColor: "#ebebeb",
     },
   },
 };

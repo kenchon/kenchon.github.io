@@ -6,7 +6,7 @@ context('Actions', () => {
   })
 
   // トップのアイコンをクリックすると，トップページにいく。
-  it('click icon of the top left to visit toppage', () => {
+  it('Click icon of the top left to visit toppage', () => {
     cy.get('a[href="/"]').click()
     cy.url().should('match', /\/$/)
   })

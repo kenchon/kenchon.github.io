@@ -1,16 +1,19 @@
-# This is a basic workflow to help you get started with Actions
+# This is a Deployment Workflow of Blog Page:
 
-name: CI
+# 1. Execute e2e test on GitHub Actions agent machine.
+# 2. If test succeeded, deploy blog on GitHub Pages.
+# 3. After deployed, check if the Deployed page is accessible.
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
+name: Deploy Blog on GitHub Pages
+
+# Controls when the action will run.
 on:
   push:
     branches: [ master, develop ]
   pull_request:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# CI workflow
 jobs:
   # This workflow contains a single job called "build"
   build:
@@ -22,14 +25,27 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-    - name: Cypress.io
+    - name: Run e2e test on GitHub Actions agent machine
       uses: cypress-io/github-action@v1.16.1
       with:
         start: yarn dev
         wait-on: 'http://localhost:8000'
-        wait-on-timeout: 400
+        wait-on-timeout: 400 # Timeout threshold should be > 240 sec because 'yarn dev' stuck
+
+    - name: Deploy Website to GitHub Pages
+      env:
+        GIT_ADDRESS: ${{ secrets.GIT_ADDRESS }}
+        GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+      run: |
+        git config --global user.email ${GIT_ADDRESS}
+        git config --global user.name ${GIT_USERNAME}
+        git remote set-url origin https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_SECRET }}@github.com/kenmikanmi/blog
+        yarn deploy
+    
+    # TODO: Replace hard-coded production URL
+    # - name: Replace baseUrl to Production Path
+    #   run: |
+    #     sed -i -e 's|"baseUrl": \(.*\)|"baseUrl": "https://kenmikanmi.github.io/blog"|g' cypress.json
+
+    # - name: Check if the Deployed page is accessible.
+    #   uses: cypress-io/github-action@v1.16.1
