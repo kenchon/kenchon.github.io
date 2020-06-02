@@ -18,6 +18,7 @@ import Tables from "@components/Tables";
 import { ImageZoom } from "@components/Image";
 import Figcaption from "@components/Figcaption";
 import Emphasis from "../Emphasis";
+import Slide from "/Users/hondoh/Source/novela-site/src/@narative/gatsby-theme-novela/components/Slide";
 
 import mediaqueries from "@styles/media";
 import { toKebabCase } from "@utils";
@@ -46,7 +47,8 @@ const components = {
   th: Tables.HeadCell,
   td: Tables.Cell,
   figcaption: Figcaption,
-  em: Emphasis.em
+  em: Emphasis.em,
+  Slide: Slide
 };
 
 interface MDXProps {
@@ -128,6 +130,31 @@ const HeadingsCSS = css`
     ${ARTICLE_WIDTH};
   }
 `;
+
+const SlideCSS = p => css`
+
+  div {
+    width: 100%;
+    left: auto;
+    margin: auto;
+    height: 0;
+    position: relative;
+    padding-bottom: 74.9296%;
+    text-align: center;
+    
+    iframe {
+      border: 20px;
+      border-radius: 20px;
+      border-color: gray;
+      top: 0;
+      width: 70%;
+      height: 70%;
+      position: relative;
+      allowfullscreen scrolling="no";
+      allow="encrypted-media";
+    }
+  }
+`
 
 const PrismCSS = p => css`
   .prism-code {
@@ -343,4 +370,5 @@ const MDXBody = styled.div`
   ${HeadingsCSS}
   ${PrismCSS}
   ${ImageCSS}
+  ${SlideCSS}
 `;

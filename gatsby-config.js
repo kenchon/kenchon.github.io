@@ -51,6 +51,7 @@ module.exports = {
       options: {
         plugins: [
           `gatsby-remark-emoji`,  // <-- this line adds emoji
+          `gatsby-remark-responsive-iframe`
         ]
       }
     },
