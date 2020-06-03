@@ -2,35 +2,32 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const IFrame = styled.iframe`
-    max-width: 780px;
-    max-height: 586px;
-    min-width: 360px;
-    min-height: 270px;
-    top: 0;
-    width: 70%;
-    height: 70%;
-    border: 0;
-    top: 0;
-    left: 0;
+  position: absolute;
+  top: 0;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  max-width:780px;
+  max-height: 585px;
+  border: 0;
 `
 
 const IFrameWrapper = styled.div`
-    width: 100%;
-    max-height: 586px;
-    // left: auto;
-    // margin: auto;
-    height: 0;
-    // position: relative;
-    padding-bottom: 74.9296%;
-    text-align: center;
-    // margin-bottom: -250px;
-    
+  position: relative;
+  display:block;
+  margin:0 auto;
+  width: 100%;
+  max-width:780px;
+  max-height: 585px;
+  padding-bottom: 75%;
+  top: 50%;
+  // transform:translateY(-50%)
 `
 
 const Slide = ( props ) => {
   return (
     <IFrameWrapper>
-        <IFrame src={ props.src }>
+        <IFrame src={ props.src } allow={"fullscreen"}>
         </IFrame>
     </IFrameWrapper>
   );
