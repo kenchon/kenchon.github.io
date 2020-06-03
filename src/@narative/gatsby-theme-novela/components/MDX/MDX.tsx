@@ -18,7 +18,7 @@ import Tables from "@components/Tables";
 import { ImageZoom } from "@components/Image";
 import Figcaption from "@components/Figcaption";
 import Emphasis from "../Emphasis";
-import Slide from "/Users/hondoh/Source/novela-site/src/@narative/gatsby-theme-novela/components/Slide";
+import Slide from "@components/Slide";
 
 import mediaqueries from "@styles/media";
 import { toKebabCase } from "@utils";
