@@ -14,21 +14,76 @@ MDX（Markdown + JSX） にスライド埋め込みしてみた。
 # 生産物
 このように，ブログにスライドをいい感じに埋め込めるようになりました。
 
-
 <Slide src="https://speakerdeck.com/player/0bf3f3abf9044ff9be9f752d8028ff0d"/>
 
 # 方法
 
-手順は [Embeded Speakerdeck Slide in Gatsby Post](https://bryanpfliu.github.io/embeded-speakerdeck-gatsby/) に
-書いてあるままです。
+[Embeded Speakerdeck Slide in Gatsby Post](https://bryanpfliu.github.io/embeded-speakerdeck-gatsby/) に
+書いてある方法に従います。
 
-ただし，Markdown にこんな長ったらしいタグを埋め込むのもめんどくさいです。
+早い話が，以下のような HTML を MDX に埋め込めばよいのですが...
 
 ```html
-<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.1972%;">
-  <iframe src="https://speakerdeck.com/player/cf04f08b30f54c41ad76d0b180effd0b?slide=9"
-    style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;"
-    allowfullscreen scrolling="no" allow="encrypted-media">
+<div style="{styles}">
+  <iframe src="https://speakerdeck.com/player/{slide_id}"
+    style="{iframe_styles}">
   </iframe>
 </div>
 ```
+
+毎回これを埋め込むのも骨が折れるので，Component 化してみました。
+
+これによって，Speakerdeck の スライドの固有識別子 `slide_id` さえ取得できれば，
+MDX に以下の1行を書くだけでスライドが表示できるようになります。
+
+```jsx
+<Slide src="https://speakerdeck.com/player/{slide_id}"/>
+```
+
+  ※ なお，`slide_id` は，以下の API から返される `url` という要素の値のことです。
+
+  `GET https://speakerdeck.com/oembed.json?url=https://speakerdeck.com/{username}/{slide_title}` 
+
+
+雰囲気で定義したコンポーネントが以下です。
+
+```jsx
+import React from 'react';
+import styled from '@emotion/styled';
+
+const IFrame = styled.iframe`
+    max-width: 780px;
+    max-height: 586px;
+    min-width: 360px;
+    min-height: 270px;
+    top: 0;
+    width: 70%;
+    height: 70%;
+    border: 0;
+    top: 0;
+    left: 0;
+`
+
+const IFrameWrapper = styled.div`
+    width: 100%;
+    max-height: 586px;
+    height: 0;
+    padding-bottom: 74.9296%;　// スライドの縦横比を固定できるらしい
+    text-align: center;
+`
+
+const Slide = ( props ) => {
+  return (
+    <IFrameWrapper>
+        <IFrame src={ props.src }>
+        </IFrame>
+    </IFrameWrapper>
+  );
+};
+
+export default Slide;
+```
+
+レスポンシブにするため，Style 定義には結構職人技が入っています。。。笑
+
+Happy Speakerdeck LIFE!!

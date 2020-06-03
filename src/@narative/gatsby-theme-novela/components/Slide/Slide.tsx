@@ -4,18 +4,17 @@ import styled from '@emotion/styled';
 const IFrame = styled.iframe`
     max-width: 780px;
     max-height: 586px;
+    min-width: 360px;
+    min-height: 270px;
     top: 0;
     width: 70%;
     height: 70%;
-    // position: relative;
-    // text-align: center;
     border: 0;
     top: 0;
     left: 0;
-
 `
 
-const Frame = styled.div`
+const IFrameWrapper = styled.div`
     width: 100%;
     max-height: 586px;
     // left: auto;
@@ -30,10 +29,10 @@ const Frame = styled.div`
 
 const Slide = ( props ) => {
   return (
-    <Frame>
-        <IFrame src={props.src}>
+    <IFrameWrapper>
+        <IFrame src={ props.src }>
         </IFrame>
-    </Frame>
+    </IFrameWrapper>
   );
 };
 
