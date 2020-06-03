@@ -8,38 +8,31 @@ excerpt: excerpt
 
 <!-- ![](https://lh3.googleusercontent.com/s8fY5QbR1GIi_4n1N3ePqmaq81FmNPD_lUiMv5piMdAxgg3WTUyRBZTGpAIEo5gphDeJy0E-Fqg24nvkGEVN9ZLcfwZXXPTGm81ZmnBMh4Idq7wbH0EzNsVEvGh9oE5Vmw5GjIbnID4) -->
 
-# TL;DR - またの名を，概要
-GitHub Actions っていうのが実質無料らしいから，このブログの e2e テストを 
-Cypress.io さんにお願いしてもらうことにした。
-
-~~てかこのブログごときにテストいるか？~~
+# TL;DR
+- *GitHub Actions* という CI/CD ツールでこのブログのデプロイワークフローを自動化してみた
+- 自動化するのはこれ↓
+  - 超簡単な疎通テスト
+  - GitHub Pages へのデプロイあ
 
 # 経緯
-- GitHub Actions って（ある制約つきで）個人でも無料で使えるんやね〜へ〜。
-- Cypress.io（Web のテストフレームワーク）の公式ワークフローもあってなんか簡単に e2e テストとかできるんやね〜へ〜
-- そう言えばこのブログ，ちゃんとデプロイできたか*デプロイ毎に手動でチェック*してるんよな〜（ちなみに 1mm も手間じゃない） 🤔
+- 🚀 GitHub Actions が実質無料
+- ⛏ Cypress.io（Web のテストフレームワーク）の公式ワークフローもあって，なんか簡単に色々できそう
+- 🤔 このブログ，`git push` したら勝手にデプロイされてほしい気持ち
 
 # やったこと
-#### GitHub Actions を有効にする
-GUI でぽちぽちやっていったら，リポジトリに `.github/workflow/*.yml` 
-というワークフロー定義が生成されます。ここに書いていきます。
+### GitHub Actions を有効にする
+GitHub のリポジトリのページにいくと，`GitHub Actions` というタブが見えますね。ここから
+GUI でぽちぽちやっていったら，リポジトリに `.github/workflow/*.yml` というワークフロー
+を定義するファイルが生成されます。ここに書いていきます。
 
-いろいろやって思ったのですが，ワークフローをいじるときは，個人でも作業用のブランチ
-切ったほうがいいです。commit & push しないとパイプラインでの動作確認ができないので，
- `master` で作業するとめっちゃコミットが残ります。
- 作業用ブランチで色々試して squash merge したほうがよいです。
+### Cypress.io のワークフローを書く
 
->![](https://lh3.googleusercontent.com/MPZbfyZhnXjfe4fuPzLwQ3s_VjBo0k41rYvyPAFbQRwL44e0Q6iH8-cvw2Ldy8AbaorsdFYt0Kiq3kPQ2v4ruJSyqmXlB9zmq3Utll35FbN_2CP95nYNlm7HtWdsROC-P6xpn-Yew88)
->　　密林
-
-#### Cypress.io のワークフローを記述する
-ワークフローの記述も GUI でできます。作成後 commit & run をそのままボタンぽちぽちでできて
-この開発体験はなかなかいい感じです。
+ワークフローの作成も GUI でできます。作成後すぐに `commit` & `run` できて便利です。
 
 >![](https://lh3.googleusercontent.com/MPWYyv_ZLrDxy16xD_ORZGvLm85E0ZvCmn0rFdK-Qyj0ITlfWlQk4mTe8eWtZVe3zvGnrtrLeowL4xpCX4i9JN_en8ePiNuS2CrhKUjx-4WpZ2pIMTP7RivPjoMmoMFBNBpRMETmkiU)
->最高な開発体験の様子
+>こんな感じ
 
-それで，自分の yarn プロジェクトにおける cypress.io のジョブ定義は下記のような感じです。
+自分のプロジェクトにおける cypress.io のジョブ定義は下記のような感じです。
 
 ```yml
 # Cypress-based e2e test
@@ -53,22 +46,69 @@ GUI でぽちぽちやっていったら，リポジトリに `.github/workflow/
 
 超シンプルです。 簡単に説明すると，
 
-- `yarn dev` (npm run) して Gatsby アプリケーション（静的サイト）を立ち上げる
-- テスト対象のエンドポイント `http://localhost:8000` を待つ
+- `yarn develop` (`npm run`) してアプリケーションを立ち上げる
+- テスト対象のエンドポイント `http://localhost:8000` にアクセスできるようになるのを待つ
+- `400` 秒間 無反応だったらテスト失敗
 
-という感じです。このあと，`yarn cypress run` 相当のこと（すなわちテスト）が実行されます。
+という感じです。わざわざ，`yarn cypress run`（すなわちテスト）のコマンドを書かなくてもテストを実行してくれます。
 
-1点ハマったのが，`localhost:8000` にアクセスできねーぞ！と怒られまくった点です。
-原因は，`yarn dev` してもアプリが立ち上がるのに 140 秒くらいかかっていたためでした。
-`wait-on` の timeout 閾値がデフォルトで 60 秒なので，
-「60 秒待ったがまだサービス立ち上がってねーぞ！」となんども治安の悪い声（赤文字）で
-怒ってきます。そこで，`wait-on-timeout` で明示的に閾値を指定しましょう。
+1点ハマったのが，「`localhost:8000` にアクセスできねーぞ！」と怒られまくった点です。
 
-#### README.md にバッチを貼る
-やってみたかったんすよねこれｗ
+原因は，`yarn dev` してアプリが立ち上がるのに 約 140 秒くらいかかっていたためでした。
 
-ということでこのブログにも貼り付けます↓
+`wait-on` の timeout 閾値がデフォルトで 60 秒なので，「60 秒待ったけどまだサービス立ち上がってねーぞ！」
+となんども治安の悪い声（赤文字）で怒ってきます。
+
+そこで，`wait-on-timeout` で明示的に閾値を指定しました。
+
+それにしても，ビルドに 140 秒はかかりすぎなので（多分でかいサイズの画像貼ってて，
+サムネイル生成に時間がかかってるのが原因のひとつ），どうにかしたいです。
+
+### GitHub Pages にデプロイする
+
+これは以下のようなフローを定義することで実現できます。
+
+- `gh-pages` （ビルド生成物を配置するブランチ）にコミットするための認証プロセス
+- 上記ブランチにデプロイ
+
+こんな具合です↓
+
+```yaml
+    - name: Deploy Website to GitHub Pages
+      env:
+        GIT_ADDRESS: ${{ secrets.GIT_ADDRESS }}
+        GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+      run: |
+        git config --global user.email ${GIT_ADDRESS}
+        git config --global user.name ${GIT_USERNAME}
+        git remote set-url origin https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_SECRET }}@github.com/kenmikanmi/blog
+        yarn deploy
+```
+
+`secrets` というオブジェクトには，事前にリポジトリの Settings/Secrets で登録した認証情報が入ります。
+
+`yarn deploy` というのは，自分のプロジェクトで `package.json` に独自に定義したコマンドで，実際には以下のコマンドが走ります。
+
+```bash
+gatsby build --prefix-paths && gh-pages -d public -b gh-pages
+```
+
+何やってるかというと，`gatsby build` でビルドして，生成物をリポジトリの `gh-pages` ブランチに `push` しとるわけです。
+
+簡単なことしかやらせていませんが，以上で 
+
+> 💻　`git push` ➡️ 「🔍 Cypress.io のテスト」  ➡️ 「🚀 GitHub Pages へのデプロイ」 
+
+という一連のワークフローの自動化が完了しました。
+
+### おまけ：README.md にバッジを貼る
+
+リポジトリの README.md にバッジ貼ってみたかった（なんかかっこいいので） 😅
+
+GitHub Actions の GUI からバッジの URL とれるので簡単に貼れます。
+
+このブログにも貼り付けます ✌️
 
 ![CI](https://github.com/kenmikanmi/blog/workflows/CI/badge.svg)
 
-また何かあったら更新します。
+それでは，*Happy CI/CD LIFE! 🚀*
