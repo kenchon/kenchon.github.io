@@ -14,6 +14,7 @@
   "dependencies": {
     "@lekoarts/gatsby-theme-specimens": "^2.1.1",
     "@narative/gatsby-theme-novela": "^0.*",
+    "@types/styled-components": "^5.1.0",
     "gatsby": "^2.13.41",
     "gatsby-plugin-canonical-urls": "^2.3.2",
     "gatsby-plugin-google-analytics": "^2.3.1",
@@ -24,7 +25,8 @@
     "gatsby-transformer-remark": "^2.6.53",
     "gh-pages": "^2.2.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "cypress": "^4.5.0"

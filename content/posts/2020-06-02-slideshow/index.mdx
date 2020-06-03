@@ -1,14 +1,34 @@
 ---
-title: スライドを貼り付ける Gatby Blog with Embeded Slides
+title: Speakerdeck のスライドをブログに埋め込む。
 author: Kenya Hondoh
 date: 2020-06-02
 hero: ./images/cypress.jpg
 excerpt: MDX にスライド埋め込みテスト
 ---
 
-# これ is なに？
-MDX にスライド埋め込みしてみた。
+# 概要
+- なんか LT とかしたときに，ブログから資料にたどり着けるようにできるといいな〜と思い， `<iframe>` なんもわからんけど，
+MDX（Markdown + JSX） にスライド埋め込みしてみた。
+- なんもわからんのにできてしまった。
 
----
+# 生産物
+このように，ブログにスライドをいい感じに埋め込めるようになりました。
 
-<Slide src="https://speakerdeck.com/player/0bf3f3abf9044ff9be9f752d8028ff0d"></Slide>
+
+<Slide src="https://speakerdeck.com/player/0bf3f3abf9044ff9be9f752d8028ff0d"/>
+
+# 方法
+
+手順は [Embeded Speakerdeck Slide in Gatsby Post](https://bryanpfliu.github.io/embeded-speakerdeck-gatsby/) に
+書いてあるままです。
+
+ただし，Markdown にこんな長ったらしいタグを埋め込むのもめんどくさいです。
+
+```html
+<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.1972%;">
+  <iframe src="https://speakerdeck.com/player/cf04f08b30f54c41ad76d0b180effd0b?slide=9"
+    style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;"
+    allowfullscreen scrolling="no" allow="encrypted-media">
+  </iframe>
+</div>
+```
