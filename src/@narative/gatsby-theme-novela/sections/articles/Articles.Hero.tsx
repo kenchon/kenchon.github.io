@@ -93,7 +93,7 @@ const SubheadingContainer = styled.div`
   `};
 
   ${mediaqueries.phablet`
-    margin-bottom: 60px;
+    margin-bottom: 40px;
   `};
 `;
 
@@ -127,6 +127,7 @@ const HeroHeading = styled.h1`
   font-weight: 600;
   font-size: 52px;
   line-height: 1.15;
+  word-wrap: break-word;
   color: ${p => p.theme.colors.primary};
 
   a {
@@ -138,7 +139,8 @@ const HeroHeading = styled.h1`
   `}
 
   ${mediaqueries.phablet`
-    font-size: 32px;
+    font-size: 30px;
+    word-wrap: break-word;
   `}
 `;
 
