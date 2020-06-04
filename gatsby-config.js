@@ -3,7 +3,7 @@ module.exports = {
   siteMetadata: {
     title: `観照日記  📖✍`,
     name: `Kenya Hondoh`,
-    siteUrl: `https://kenmikanmi.github.io`,
+    siteUrl: `https://kenmikanmi.github.io/blog`,
     description: `kenmikanmi の徒然なるままに書き起こしたブログです。`,
     hero: {
       heading: `観照日記 📖✍️`,
