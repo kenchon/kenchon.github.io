@@ -30,7 +30,7 @@ jobs:
       with:
         start: yarn dev
         wait-on: 'http://localhost:8000'
-        wait-on-timeout: 400 # Timeout threshold should be > 240 sec because 'yarn dev' stuck
+        wait-on-timeout: 600 # Timeout threshold should be > 240 sec because 'yarn dev' stuck
 
     - name: Deploy Website to GitHub Pages
       env:
