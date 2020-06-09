@@ -3,13 +3,15 @@ title: Speakerdeck のスライドをブログに埋め込む。
 author: Kenya Hondoh
 date: 2020-06-02
 hero: ./images/cypress.png
-excerpt: MDX にスライド埋め込みテスト
+excerpt: MDX に埋め込むためのコンポーネントをつくる。
 ---
 
 # 概要
 このように，ブログにスライドをいい感じに埋め込めるようになりました。
 
-<Slide src="https://speakerdeck.com/player/0bf3f3abf9044ff9be9f752d8028ff0d"/>
+<Slide src="https://speakerdeck.com/player/0bf3f3abf9044ff9be9f752d8028ff0d?slide=18"/>
+
+改善の余地は色々あるけどとりあえずヨシ！
 
 # 経緯
 - なにかスライド発表とかした時に，ブログに埋め込めたらいいなぁと思った。
@@ -17,10 +19,7 @@ excerpt: MDX にスライド埋め込みテスト
 
 # 方法
 
-[Embeded Speakerdeck Slide in Gatsby Post](https://bryanpfliu.github.io/embeded-speakerdeck-gatsby/) に
-書いてある方法に従います。
-
-早い話が，以下の HTML ソースコードをMDX に埋め込めばよいのですが...
+早い話が，以下のような HTML ソースコードをMDX に埋め込めばよいです。
 
 ```html
 <div style="{styles}">
@@ -30,19 +29,19 @@ excerpt: MDX にスライド埋め込みテスト
 </div>
 ```
 
-毎回これを埋め込むのも骨が折れるので，Component 化してみました。
+このブログでは，マークアップに MDX というのを使っています。MDX というのは `JSX embedded in Markdown`，
+はしょっていうと，React コンポーネントをマークダウンに埋め込んで使えるフォーマット形式です。
 
-これによって，Speakerdeck の スライドの固有識別子 `slide_id` さえ取得できれば，
-MDX に以下の1行を書くだけでスライドが表示できるようになります。
+なので，先ほどの5行もあるソースコードを，コンポーネントにすることで，以下のような形式でかけるようになります。
 
 ```jsx
 <Slide src="https://speakerdeck.com/player/{slide_id}"/>
 ```
 
-  ※ なお，`slide_id` は，以下の API から返される `url` という要素の値のことです。
-
-  `GET https://speakerdeck.com/oembed.json?url=https://speakerdeck.com/{username}/{slide_title}` 
-
+  ※余談： `slide_id` は，以下の API から JSON 形式で返される `url` という要素の値のことです。
+```
+GET https://speakerdeck.com/oembed.json?url={slide_url}
+```
 
 雰囲気で定義したコンポーネントが以下です。
 
@@ -86,6 +85,6 @@ export default Slide;
 
 ```
 
-スマホやデスクトップ端末でもいい感じに表示できるようにする（これを，*レスポンシブ* というそうです）ため，style 定義には結構職人技が入っています。
+スマホやデスクトップ端末でもいい感じに表示できるようにする（これを，レスポンシブというそうです）ため，style 定義には職人技が入っています。
 
-Happy Speakerdeck LIFE!!
+それでは Happy Speakerdeck LIFE!!
