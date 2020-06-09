@@ -65,10 +65,11 @@ public
 yarn-error.log
 .pnp/
 .pnp.js
+
 # Yarn Integrity file
 .yarn-integrity
-
 .netlify/
 
 # Test Artifacts
-*.mp4
+cypress/screenshots
+cypress/videos
