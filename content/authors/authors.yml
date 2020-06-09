@@ -1,8 +1,7 @@
 - name: Kenya Hondoh
   bio: |- 
-    DevOps，クラウド，組織文化，DX などの怪しいことを勉強中。<br>
-    一瞬フロントエンド開発をやってたのをきっかけに<a href="./Hello-World!">ブログを開設しました</a>。<br>
-    <a href="https://github.com/kenmikanmi">GitHub🐈</a>
+    みんながハッピーな組織にするには？みたいなことを考え続けている怪しいエンジニャ。<br>
+    一瞬フロントエンド開発をやってたのをきっかけに<a href="./Hello-World!">ブログを開設</a>。<br>
   avatar: ./avatars/kenya_hondoh.jpg
   social:
     - url: https://github.com/kenmikanmi
