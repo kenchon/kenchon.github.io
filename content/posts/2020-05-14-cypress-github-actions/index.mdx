@@ -3,36 +3,42 @@ title: GitHub Actions ＋ Cypress.io でこのブログを CI する
 author: Kenya Hondoh
 date: 2020-05-14
 hero: ./images/cypress.png
-excerpt: excerpt
+excerpt: 退屈なことは GitHub Actions にやらせよう
 ---
 
 <!-- ![](https://lh3.googleusercontent.com/s8fY5QbR1GIi_4n1N3ePqmaq81FmNPD_lUiMv5piMdAxgg3WTUyRBZTGpAIEo5gphDeJy0E-Fqg24nvkGEVN9ZLcfwZXXPTGm81ZmnBMh4Idq7wbH0EzNsVEvGh9oE5Vmw5GjIbnID4) -->
 
 # TL;DR
-- *GitHub Actions* という CI/CD ツールでこのブログのデプロイワークフローを自動化してみた
-- 自動化するのはこれ↓
+*GitHub Actions* という CI/CD ツールでこのブログのデプロイワークフローを自動化してみた。
+
+ワークフローというのは，
   - 超簡単な疎通テスト
-  - GitHub Pages へのデプロイあ
+  - GitHub Pages へのデプロイ
 
 # 経緯
 - 🚀 GitHub Actions が実質無料
-- ⛏ Cypress.io（Web のテストフレームワーク）の公式ワークフローもあって，なんか簡単に色々できそう
+- ⛏ Cypress.io という Web のテストフレームワーク使ってみたいすぎる
 - 🤔 このブログ，`git push` したら勝手にデプロイされてほしい気持ち
 
 # やったこと
+
 ### GitHub Actions を有効にする
-GitHub のリポジトリのページにいくと，`GitHub Actions` というタブが見えますね。ここから
+
+GitHub のリポジトリのページにいくと，`GitHub Actions` というタブが見えます。ここから
 GUI でぽちぽちやっていったら，リポジトリに `.github/workflow/*.yml` というワークフロー
 を定義するファイルが生成されます。ここに書いていきます。
 
-### Cypress.io のワークフローを書く
-
-ワークフローの作成も GUI でできます。作成後すぐに `commit` & `run` できて便利です。
+GUI でワークフローをいじって，作成後すぐに `commit` & `run` できます。
 
 >![](https://lh3.googleusercontent.com/MPWYyv_ZLrDxy16xD_ORZGvLm85E0ZvCmn0rFdK-Qyj0ITlfWlQk4mTe8eWtZVe3zvGnrtrLeowL4xpCX4i9JN_en8ePiNuS2CrhKUjx-4WpZ2pIMTP7RivPjoMmoMFBNBpRMETmkiU)
 >こんな感じ
 
-自分のプロジェクトにおける cypress.io のジョブ定義は下記のような感じです。
+### Cypress.io のワークフローを書く
+
+次に，テストが CI で走るようにします。テストには Cypress.io というフレームワークを使っていたのですが，
+GitHub Actions に公式のジョブ定義があり，これを使いました。
+
+自分のプロジェクトにおける Cypress.io のジョブ定義は下記のような感じです。
 
 ```yml
 # Cypress-based e2e test
@@ -41,7 +47,7 @@ GUI でぽちぽちやっていったら，リポジトリに `.github/workflow/
     with:
         start: yarn dev
         wait-on: 'http://localhost:8000'
-        wait-on-timeout: 400 # ⭐️：これのせいで大変だった
+        wait-on-timeout: 120 # (sec)。ビルド時間が長いなら明示する。
 ```
 
 超シンプルです。 簡単に説明すると，
@@ -50,26 +56,42 @@ GUI でぽちぽちやっていったら，リポジトリに `.github/workflow/
 - テスト対象のエンドポイント `http://localhost:8000` にアクセスできるようになるのを待つ
 - `400` 秒間 無反応だったらテスト失敗
 
-という感じです。わざわざ，`yarn cypress run`（すなわちテスト）のコマンドを書かなくてもテストを実行してくれます。
+という感じです。`yarn cypress run`（すなわちテスト）のコマンドを書かなくてもテストを実行してくれます。
 
-1点ハマったのが，「`localhost:8000` にアクセスできねーぞ！」と怒られまくった点です。
+`wait-on-timeout` というプロパティがありますが，ビルドに時間がかかるプロジェクトをお持ちの方は，ここでタイムアウト閾値を
+設定しておきましょう（例：`120` 秒）。このプロパティを明示しないと，`60` 秒（デフォルトの閾値）以上 `localhost:8000` に
+アクセスできない場合テスト失敗となってしまいます。
 
-原因は，`yarn dev` してアプリが立ち上がるのに 約 140 秒くらいかかっていたためでした。
+余談）ちなみに私はここでハマりました。
 
-`wait-on` の timeout 閾値がデフォルトで 60 秒なので，「60 秒待ったけどまだサービス立ち上がってねーぞ！」
-となんども治安の悪い声（赤文字）で怒ってきます。
+ちなみに，テストでは「このブログのトップにあるイカちゃんをクリックしたらトップページに遷移する」ことしか確認してません 笑
 
-そこで，`wait-on-timeout` で明示的に閾値を指定しました。
+テストコードはこんな感じです：
 
-それにしても，ビルドに 140 秒はかかりすぎなので（多分でかいサイズの画像貼ってて，
-サムネイル生成に時間がかかってるのが原因のひとつ），どうにかしたいです。
+```js
+/// <reference types="cypress" />
+
+context('Actions', () => {
+  beforeEach(() => {
+    cy.visit('/')
+  })
+  // トップのアイコンをクリックすると，トップページにいく。
+  it('Click icon of the top left to visit toppage', () => {
+    cy.get('#blog-logo').click()
+    cy.url().should('match', /\/$/)
+  })
+})
+```
+
+Cypress.io のいいところは，行数が少なくて記述もシンプルで済むところです。
 
 ### GitHub Pages にデプロイする
 
-これは以下のようなフローを定義することで実現できます。
+テストが成功したら，デプロイします。
 
+これは以下のようなフローを定義することで実現できます。
 - `gh-pages` （ビルド生成物を配置するブランチ）にコミットするための認証プロセス
-- 上記ブランチにデプロイ
+- 上記ブランチに生成物を配置する
 
 こんな具合です↓
 
@@ -103,7 +125,7 @@ gatsby build --prefix-paths && gh-pages -d public -b gh-pages
 
 ### おまけ：README.md にバッジを貼る
 
-リポジトリの README.md にバッジ貼ってみたかった（なんかかっこいいので） 😅
+リポジトリの README.md に「ビルド成功」のバッジ貼ってみたかった（なんかちゃんとした感があるので 😅）
 
 GitHub Actions の GUI からバッジの URL とれるので簡単に貼れます。
 
