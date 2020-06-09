@@ -1,6 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+const Slide = ( props ) => {
+  return (
+    <IFrameWrapper>
+        <IFrame src={ props.src } allow={"fullscreen"}>
+        </IFrame>
+    </IFrameWrapper>
+  );
+};
+
 const IFrame = styled.iframe`
   position: absolute;
   top: 0;
@@ -21,16 +30,6 @@ const IFrameWrapper = styled.div`
   max-height: 585px;
   padding-bottom: 75%;
   top: 50%;
-  // transform:translateY(-50%)
 `
-
-const Slide = ( props ) => {
-  return (
-    <IFrameWrapper>
-        <IFrame src={ props.src } allow={"fullscreen"}>
-        </IFrame>
-    </IFrameWrapper>
-  );
-};
 
 export default Slide;
