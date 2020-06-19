@@ -1,9 +1,11 @@
+require('dotenv').config();
+
 module.exports = {
   pathPrefix: "/blog",
   siteMetadata: {
     title: `観照日記  📖✍`,
     name: `Kenya Hondoh`,
-    siteUrl: `https://kenmikanmi.github.io/blog`,
+    siteUrl: `https://kenmikanmi.github.io`,
     description: `kenmikanmi の徒然なるままに書き起こしたブログです。`,
     hero: {
       heading: `観照日記 📖✍️`,
@@ -33,6 +35,13 @@ module.exports = {
     ],
   },
   plugins: [
+    // {
+    //   resolve: 'gatsby-source-contentful',
+    //   options: {
+    //     spaceId: process.env.CONTENTFUL_SPACE_ID || secrets.CONTENTFUL_SPACE_ID,
+    //     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || secrets.CONTENTFUL_ACCESS_TOKEN,
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
@@ -51,6 +60,7 @@ module.exports = {
       options: {
         plugins: [
           `gatsby-remark-emoji`,  // <-- this line adds emoji
+          `gatsby-remark-responsive-iframe`
         ]
       }
     },

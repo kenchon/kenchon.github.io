@@ -2,44 +2,43 @@
 title: GitHub Actions ＋ Cypress.io でこのブログを CI する
 author: Kenya Hondoh
 date: 2020-05-14
-hero: ./images/cypress.jpg
-excerpt: excerpt
+hero: ./images/cypress.png
+excerpt: 退屈なことは GitHub Actions にやらせよう
 ---
 
 <!-- ![](https://lh3.googleusercontent.com/s8fY5QbR1GIi_4n1N3ePqmaq81FmNPD_lUiMv5piMdAxgg3WTUyRBZTGpAIEo5gphDeJy0E-Fqg24nvkGEVN9ZLcfwZXXPTGm81ZmnBMh4Idq7wbH0EzNsVEvGh9oE5Vmw5GjIbnID4) -->
 
-# TL;DR - またの名を，概要
-GitHub Actions っていうのが実質無料らしいから，このブログの e2e テストを 
-Cypress.io さんにお願いしてもらうことにした。
+# TL;DR
+*GitHub Actions* という CI/CD ツールでこのブログのデプロイワークフローを自動化してみた。
 
-~~てかこのブログごときにテストいるか？~~
+自動化するワークフロー ↓
+  - 超簡単な疎通テスト
+  - GitHub Pages へのデプロイ
 
 # 経緯
-- GitHub Actions って（ある制約つきで）個人でも無料で使えるんやね〜へ〜。
-- Cypress.io（Web のテストフレームワーク）の公式ワークフローもあってなんか簡単に e2e テストとかできるんやね〜へ〜
-- そう言えばこのブログ，ちゃんとデプロイできたか*デプロイ毎に手動でチェック*してるんよな〜（ちなみに 1mm も手間じゃない） 🤔
+- 🚀 GitHub Actions が実質無料
+- ⛏ Cypress.io という Web のテストフレームワーク使ってみたいすぎる
+- 🤔 このブログ，`git push` したら勝手にデプロイされてほしい気持ち
 
 # やったこと
-#### GitHub Actions を有効にする
-GUI でぽちぽちやっていったら，リポジトリに `.github/workflow/*.yml` 
-というワークフロー定義が生成されます。ここに書いていきます。
 
-いろいろやって思ったのですが，ワークフローをいじるときは，個人でも作業用のブランチ
-切ったほうがいいです。commit & push しないとパイプラインでの動作確認ができないので，
- `master` で作業するとめっちゃコミットが残ります。
- 作業用ブランチで色々試して squash merge したほうがよいです。
+### GitHub Actions を有効にする
 
->![](https://lh3.googleusercontent.com/MPZbfyZhnXjfe4fuPzLwQ3s_VjBo0k41rYvyPAFbQRwL44e0Q6iH8-cvw2Ldy8AbaorsdFYt0Kiq3kPQ2v4ruJSyqmXlB9zmq3Utll35FbN_2CP95nYNlm7HtWdsROC-P6xpn-Yew88)
->　　密林
+GitHub のリポジトリのページにいくと，`GitHub Actions` というタブが見えます。ここから
+GUI でぽちぽちやっていったら，リポジトリに `.github/workflow/*.yml` というワークフロー
+を定義するファイルが生成されます。ここに書いていきます。
 
-#### Cypress.io のワークフローを記述する
-ワークフローの記述も GUI でできます。作成後 commit & run をそのままボタンぽちぽちでできて
-この開発体験はなかなかいい感じです。
+GUI でワークフローをいじって，作成後すぐに `commit` & `run` できます。
 
 >![](https://lh3.googleusercontent.com/MPWYyv_ZLrDxy16xD_ORZGvLm85E0ZvCmn0rFdK-Qyj0ITlfWlQk4mTe8eWtZVe3zvGnrtrLeowL4xpCX4i9JN_en8ePiNuS2CrhKUjx-4WpZ2pIMTP7RivPjoMmoMFBNBpRMETmkiU)
->最高な開発体験の様子
+>こんな感じ
 
-それで，自分の yarn プロジェクトにおける cypress.io のジョブ定義は下記のような感じです。
+### Cypress.io のワークフローを書く
+
+次に，テストが CI で走るようにします。テストには Cypress.io というフレームワークを使っていたのですが，
+GitHub Actions に公式のジョブ定義があり，これを使いました。
+
+自分のプロジェクトにおける Cypress.io のジョブ定義は下記のような感じです。
 
 ```yml
 # Cypress-based e2e test
@@ -48,27 +47,90 @@ GUI でぽちぽちやっていったら，リポジトリに `.github/workflow/
     with:
         start: yarn dev
         wait-on: 'http://localhost:8000'
-        wait-on-timeout: 400 # ⭐️：これのせいで大変だった
+        wait-on-timeout: 120 # (sec)。ビルド時間が長いなら明示する。
 ```
 
 超シンプルです。 簡単に説明すると，
 
-- `yarn dev` (npm run) して Gatsby アプリケーション（静的サイト）を立ち上げる
-- テスト対象のエンドポイント `http://localhost:8000` を待つ
+- `yarn develop` (`npm run`) してアプリケーションを立ち上げる
+- テスト対象のエンドポイント `http://localhost:8000` にアクセスできるようになるのを待つ
+- `400` 秒間 無反応だったらテスト失敗
 
-という感じです。このあと，`yarn cypress run` 相当のこと（すなわちテスト）が実行されます。
+という感じです。`yarn cypress run`（すなわちテスト）のコマンドを書かなくてもテストを実行してくれます。
 
-1点ハマったのが，`localhost:8000` にアクセスできねーぞ！と怒られまくった点です。
-原因は，`yarn dev` してもアプリが立ち上がるのに 140 秒くらいかかっていたためでした。
-`wait-on` の timeout 閾値がデフォルトで 60 秒なので，
-「60 秒待ったがまだサービス立ち上がってねーぞ！」となんども治安の悪い声（赤文字）で
-怒ってきます。そこで，`wait-on-timeout` で明示的に閾値を指定しましょう。
+`wait-on-timeout` というプロパティがありますが，ビルドに時間がかかるプロジェクトをお持ちの方は，ここでタイムアウト閾値を
+設定しておきましょう（例：`120` 秒）。このプロパティを明示しないと，`60` 秒（デフォルトの閾値）以上 `localhost:8000` に
+アクセスできない場合テスト失敗となってしまいます。
 
-#### README.md にバッチを貼る
-やってみたかったんすよねこれｗ
+余談）ちなみに私はここでハマりました。
 
-ということでこのブログにも貼り付けます↓
+ちなみに，テストでは「このブログのトップにあるイカちゃんをクリックしたらトップページに遷移する」ことしか確認してません 笑
+
+テストコードはこんな感じです：
+
+```js
+/// <reference types="cypress" />
+
+context('Actions', () => {
+  beforeEach(() => {
+    cy.visit('/')
+  })
+  // トップのアイコンをクリックすると，トップページにいく。
+  it('Click icon of the top left to visit toppage', () => {
+    cy.get('#blog-logo').click()
+    cy.url().should('match', /\/$/)
+  })
+})
+```
+
+Cypress.io のいいところは，行数が少なくて記述もシンプルで済むところです。
+
+### GitHub Pages にデプロイする
+
+テストが成功したら，デプロイします。
+
+これは以下のようなフローを定義することで実現できます。
+- `gh-pages` （ビルド生成物を配置するブランチ）にコミットするための認証プロセス
+- 上記ブランチに生成物を配置する
+
+こんな具合です↓
+
+```yaml
+    - name: Deploy Website to GitHub Pages
+      env:
+        GIT_ADDRESS: ${{ secrets.GIT_ADDRESS }}
+        GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+      run: |
+        git config --global user.email ${GIT_ADDRESS}
+        git config --global user.name ${GIT_USERNAME}
+        git remote set-url origin https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_SECRET }}@github.com/kenmikanmi/blog
+        yarn deploy
+```
+
+`secrets` というオブジェクトには，事前にリポジトリの Settings/Secrets で登録した認証情報が入ります。
+
+`yarn deploy` というのは，自分のプロジェクトで `package.json` に独自に定義したコマンドで，実際には以下のコマンドが走ります。
+
+```bash
+gatsby build --prefix-paths && gh-pages -d public -b gh-pages
+```
+
+何やってるかというと，`gatsby build` でビルドして，生成物をリポジトリの `gh-pages` ブランチに `push` しとるわけです。
+
+簡単なことしかやらせていませんが，以上で 
+
+> 💻　`git push` ➡️ 「🔍 Cypress.io のテスト」  ➡️ 「🚀 GitHub Pages へのデプロイ」 
+
+という一連のワークフローの自動化が完了しました。
+
+### おまけ：README.md にバッジを貼る
+
+リポジトリの README.md に「ビルド成功」のバッジ貼ってみたかった 😅
+
+GitHub Actions の GUI からバッジの URL とれるので簡単に貼れます。
+
+このブログにも貼り付けます ✌️
 
 ![CI](https://github.com/kenmikanmi/blog/workflows/CI/badge.svg)
 
-また何かあったら更新します。
+それでは，*Happy CI/CD LIFE! 🚀*

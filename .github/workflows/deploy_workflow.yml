@@ -1,0 +1,56 @@
+# This is a Deployment Workflow of Blog Page:
+
+# 1. Execute e2e test on GitHub Actions agent machine.
+# 2. If test succeeded, deploy blog on GitHub Pages.
+# 3. After deployed, check if the Deployed page is accessible.
+
+name: Deploy Blog on GitHub Pages
+
+# Controls when the action will run.
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master ]
+
+# CI workflow
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-18.04
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name: Lint Code Base
+      uses: github/super-linter@v2.0.0
+      env:
+        VALIDATE_JSON: false
+
+    - name: Run e2e test on GitHub Actions agent machine
+      uses: cypress-io/github-action@v1.16.1
+      with:
+        start: yarn dev
+        wait-on: 'http://localhost:8000'
+        wait-on-timeout: 600 # Timeout threshold should be > 240 sec because 'yarn dev' stuck
+
+    - name: Deploy Website to GitHub Pages
+      env:
+        GIT_ADDRESS: ${{ secrets.GIT_ADDRESS }}
+        GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+      run: |
+        git config --global user.email ${GIT_ADDRESS}
+        git config --global user.name ${GIT_USERNAME}
+        git remote set-url origin https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_SECRET }}@github.com/kenmikanmi/blog
+        yarn deploy
+    
+    # TODO: Replace hard-coded production URL
+    # - name: Replace baseUrl to Production Path
+    #   run: |
+    #     sed -i -e 's|"baseUrl": \(.*\)|"baseUrl": "https://kenmikanmi.github.io/blog"|g' cypress.json
+
+    # - name: Check if the Deployed page is accessible.
+    #   uses: cypress-io/github-action@v1.16.1

@@ -1,0 +1,88 @@
+---
+title: Speakerdeck のスライドをブログに埋め込む。
+author: Kenya Hondoh
+date: 2020-06-02
+hero: ./images/cypress.png
+excerpt: MDX に埋め込むためのコンポーネントをつくる。
+---
+
+# 概要
+このように，ブログにスライドをいい感じに埋め込めるようになりました。
+
+<Slide src="https://speakerdeck.com/player/0bf3f3abf9044ff9be9f752d8028ff0d?slide=18"/>
+
+# 経緯
+- なにかスライド発表とかした時に，ブログに埋め込めたらいいなぁと思った。
+- なんもわからんけどできてしまった。
+
+# 方法
+
+早い話が，以下のような HTML ソースコードをMDX に埋め込めばよいです。
+
+```html
+<div style="{styles}">
+  <iframe src="https://speakerdeck.com/player/{slide_id}"
+    style="{iframe_styles}">
+  </iframe>
+</div>
+```
+
+このブログでは，マークアップに MDX というのを使っています。MDX というのは `JSX embedded in Markdown`，
+はしょっていうと，React コンポーネントをマークダウンに埋め込んで使えるフォーマット形式です。
+
+なので，先ほどの5行もあるソースコードを，コンポーネントにすることで，以下のような形式でかけるようになります。
+
+```jsx
+<Slide src="https://speakerdeck.com/player/{slide_id}"/>
+```
+
+  ※余談： `slide_id` は，以下の API から JSON 形式で返される `url` という要素の値のことです。
+```
+GET https://speakerdeck.com/oembed.json?url={slide_url}
+```
+
+雰囲気で定義したコンポーネントが以下です。
+
+```jsx
+import React from 'react';
+import styled from '@emotion/styled';
+
+const IFrame = styled.iframe`
+  position: absolute;
+  top: 0;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  max-width:780px;
+  max-height: 585px;
+  border: 0;
+`
+
+const IFrameWrapper = styled.div`
+  position: relative;
+  display:block;
+  margin:0 auto;
+  width: 100%;
+  max-width:780px;
+  max-height: 585px;
+  padding-bottom: 75%;
+  top: 50%;
+  // transform:translateY(-50%)
+`
+
+const Slide = ( props ) => {
+  return (
+    <IFrameWrapper>
+        <IFrame src={ props.src } allow={"fullscreen"}>
+        </IFrame>
+    </IFrameWrapper>
+  );
+};
+
+export default Slide;
+
+```
+
+スマホやデスクトップ端末でもいい感じに表示できるようにする（これを，レスポンシブというそうです）ため，style 定義には職人技が入っています。
+
+それでは Happy Speakerdeck LIFE!!

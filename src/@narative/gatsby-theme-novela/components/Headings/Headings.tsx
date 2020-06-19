@@ -15,7 +15,8 @@ const commonStyles = p => css`
 `;
 
 const h1 = styled.h1`
-  word-break: keep-all;
+  // word-break: keep-all;
+  word-break: break-word;
   font-size: 52px;
   line-height: 1.2;
   
@@ -33,7 +34,8 @@ const h1 = styled.h1`
 `;
 
 const h2 = styled.h2`
-  word-break: keep-all;
+  // word-break: keep-all;
+  word-break: break-word;
   font-size: 32px;
   line-height: 1.333;
   background:linear-gradient(transparent 90%, ${ p => p.theme.colors.underline } 50%); 
@@ -54,7 +56,8 @@ const h2 = styled.h2`
 `;
 
 const h3 = styled.h3`
-  word-break: keep-all;
+  // word-break: keep-all;
+  word-break: break-word;
   font-size: 21px;
   line-height: 1.45;
   background:linear-gradient(transparent 90%, #03a1fc 0%);
