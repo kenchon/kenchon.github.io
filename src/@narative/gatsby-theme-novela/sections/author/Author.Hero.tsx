@@ -20,7 +20,7 @@ const AuthorHero: React.FC<AuthorHeroProps> = ({ author }) => {
         <RoundedImage src={author.avatar.large} />
       </HeroImage>
       <Heading>{author.name}</Heading>
-      <Subheading dangerouslySetInnerHTML={{ __html: author.bio }}/>
+       <Subheading dangerouslySetInnerHTML={{ __html: author.bio }}/>
       <Social>
         <SocialLinks links={author.social} />
       </Social>
