@@ -13,8 +13,8 @@ excerpt: はじめての投稿。
 ## ブログ開設のきっかけ
 
 Microsoft Ignite 2019 のあるセッションで，
-「[GatsbyJS](https://www.gatsbyjs.org/) で *JamStack* するといいぞい」
-みたいな話をチョロっと聞いて雰囲気で完全に理解してしまったので，
+「[GatsbyJS](https://www.gatsbyjs.org/) で *JAMStack* するといいぞい」
+みたいな話をチョロっと聞いて雰囲気で完全に理解してしまった（完全に理解したの[定義](https://giwiz-rts.c.yimg.jp/im_siggiruZjtn2y533J7Z7zjKIYw---x600-y315-ifmgif-prix/p/rts/EQ5JuOhxwzDusazqKAupFNfH_Y6vf6Fka1HM666sknc2q5A67af3a_3ujkXly8v4jHXJKA--)）ので，
 ドキュメント読みながら静的ウェブページ（つまりブログ）を構築してみました。
 
 ## 何を使ってるのか
@@ -25,15 +25,15 @@ Microsoft Ignite 2019 のあるセッションで，
 
   Gatsby には「テーマ」という概念があり，人が作ったテンプレートを npm パッケージとしてインストールして拡張できます。
 私のこのウェブページは，そのテーマのひとつである [Narative Novela](https://github.com/narative/gatsby-theme-novela) 
-というテーマのスタイルをカスタマイズしてます。
+というテーマのスタイルをカスタマイズしてます。  
 
 - *記事の管理*
 
-  記事の管理は Git で行っていますが，将来的には Contentful などの CMS に置き換えていきたいと思ってます。
-  構成上，同一リポジトリにコンテンツとソースコードがあるのが何か気持ち悪いからです。
+  記事の管理はこのブログ資産と同じ Git リポジトリで行っています。
+  将来的には Contentful などの CMS （コンテンツ管理システム）に配置して，API で記事を取得できるようにしたいと思っています。
 
-  また，記事のマークアップには MDX というのを使っています。Markdown を拡張したやつで，
-  React コンポーネントを `import` して使うことができるという特徴を持っています。
+　記事のマークアップには MDX というのを使っています。Markdown を拡張したやつで，
+  React という JS のフレームワークで書かれたコンポーネントを `import` して使うことができるという特徴を持っています。
 
 - *ウェブサイトのホスティング*
 
@@ -41,9 +41,7 @@ Microsoft Ignite 2019 のあるセッションで，
 
 - *CI/CD*
 
-  自動テスト・自動デプロイ のワークフローを GitHub Actions で記述しています。テストには Cypress.io という
+  自動テスト・自動デプロイ のワークフローを GitHub Actions で行っています。テストには Cypress.io という
   テスティングフレームワークを使っています。
 　
   👉　[関連記事: GitHub Actions ＋ Cypress.io でこのブログを CI する](/GitHub-Actions-Cypress.io-CI/)
-
-## 
