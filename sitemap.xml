@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 <url> <loc>https://kenmikanmi.github.io/blog/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenmikanmi.github.io/blog/page/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenmikanmi.github.io/blog/javascript-with-mdn-docs</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenmikanmi.github.io/blog/farewell-to-anal-fistula</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenmikanmi.github.io/blog/-beyond-legacy-code</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenmikanmi.github.io/blog/speakerdeck</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenmikanmi.github.io/blog/github-actions-cypress.io-cicd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenmikanmi.github.io/blog/android</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenmikanmi.github.io/blog/the-art-of-readable-code</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenmikanmi.github.io/blog/hello-world!</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenmikanmi.github.io/blog/authors/kenya-hondoh</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenmikanmi.github.io/blog/authors/kenya-hondoh/page/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenmikanmi.github.io/blog/JavaScript-with-MDN-docs</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenmikanmi.github.io/blog/Farewell-to-Anal-Fistula</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenmikanmi.github.io/blog/-Beyond-Legacy-Code</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenmikanmi.github.io/blog/Speakerdeck</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenmikanmi.github.io/blog/GitHub-Actions-Cypress.io-CICD</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenmikanmi.github.io/blog/Android</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenmikanmi.github.io/blog/The-Art-of-Readable-Code</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenmikanmi.github.io/blog/Hello-World!</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenmikanmi.github.io/blog/authors/Kenya-Hondoh</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenmikanmi.github.io/blog/authors/Kenya-Hondoh/page/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
