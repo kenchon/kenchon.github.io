@@ -7,11 +7,9 @@ excerpt: 俺たちは雰囲気で JavaScript を書いている。
 ---
 
 ### 概要
-JavaScript を雰囲気で書いていたので，[MDN Web Docs の JavaScript 入門編](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Introduction)を読むことにした。この記事はそのメモである。
+- JavaScript を雰囲気で書いていたので，[MDN Web Docs の JavaScript 入門編](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Introduction)を読むことにした。この記事はそのメモである。
+- JavaScript が生まれた経緯や，構文や制御フローを Java から踏襲した話，Java との違いについても[ページの冒頭](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Introduction)に書いてあっておもしろい。
 
-### なんで "Java" Script なの？
-
-もともと LiveScript という名前だったけど，あるとき Java の制御構文とか使えるようにすることがあって，そのときに Java という名前がつけられた。
 
 ### セミコロンの扱い
 
@@ -85,14 +83,14 @@ console.log(MY_ARRAY); //logs ['HTML','CSS','JAVASCRIPT'];
 
 ### 数値から文字列への変換
 
-おそらく JS 特有でかつ知ってたら便利そうなのでメモ。
-
 数値を表す文字列（例：`"11"`）の先頭に `+` をつけると数値として扱われる。 
 ```js
 const a = '11';
 console.log(a + a); // 1111
 console.log(+a + +a); // 22
 ```
+
+おそらく JS 特有でかつ知ってたら便利そうなのでメモしておく。
 
 ### `let` と `const` のスコープ
 
@@ -187,7 +185,17 @@ catch (err) {
 
 ### ラベル付き文
 
-ループに対してラベルをつけることができる。こうすることで，入れ子になったループでどのループを `break` するか決めることができる。
+ループに対してラベルをつけることができる。
+
+```js
+  // ループに名前をつけられる
+  楽しいループ:
+  for (let word of ['JS楽しい！', 'JS is fun!']){
+    console.log(word);
+  }
+```
+
+こうすることで，入れ子になったループでどのループを `break` するか決めることができる。
 
 例）
 ```js
