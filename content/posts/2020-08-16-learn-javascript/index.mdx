@@ -7,19 +7,18 @@ excerpt: 俺たちは雰囲気で JavaScript を書いている。
 ---
 
 ### 概要
-- JavaScript を雰囲気で書いていたので，[MDN Web Docs の JavaScript 入門編](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Introduction)を読むことにした。この記事はそのメモである。
-- JavaScript が生まれた経緯や，構文や制御フローを Java から踏襲した話，Java との違いについても[ページの冒頭](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Introduction)に書いてあっておもしろい。
+JavaScript を雰囲気で書いていたので，[MDN Web Docs の JavaScript 入門編](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Introduction)を読むことにした。この投稿はそのメモである。
 
 
-### セミコロンの扱い
+### JavaScript におけるセミコロンの扱い
 
 - 1行1式ならセミコロン不要。
 - 複数行を1行にまとめて書くなら式の区切りとして必要。
-- でも，基本的につけることを推奨。
+- でも，バグの元になるので基本的につけることを推奨。
 
 ```js
 // 複数の式を1行で書く時セミコロンいる
-const a = 1; const b=2; const c=3;
+const a = 1; const b = 2; const c = 3;
 // 1行1式ならつけなくてもOK 
 console.log( a + b + c )
 ```
@@ -28,41 +27,46 @@ console.log( a + b + c )
 
 宣言してない変数を利用したとき，普通は `ReferenceError` という例外が発生する。
 
-でも，その変数を利用したあとで宣言する場合，利用する場所において例外が発生しない仕様になっている。
-例えば，以下の例では，2行目で `あ` を宣言しているので 1行目の時点で `あ` を未宣言であっても例外を発生しない。
-
 ```js
-console.log(あ === undefined);  // true となり，例外を発生しない。
-var あ = "a";
-console.log(あ)  // a
+// var で宣言する場合
+var declared_var;
+declared_var = '宣言済みの変数';
+
+// 宣言してない場合
+undeclared_var = '未宣言の変数'; // ReferenceError になる
 ```
 
-これは，以下のコードのように解釈されるかららしい。
+でも，次の場合は例外を発生しない。
 
 ```js
-var あ;
-console.log(あ === undefined);  // true となり，例外を発生しない。
-var あ = "a";
-console.log(あ)  // a
+console.log(undeclared_var === undefined); // true　例外を発生しない。
+var undeclared_var;
 ```
 
-このように，コードの先頭で `undefined` の `あ` が宣言されているように見えるので，これを *巻き上げ*（ホイスティング）と呼ぶ。
+↑のように，あとから `undeclared_var` を宣言すると `undeclared_var` には `undefined` が入る。
+これは，上記のコードが以下のように解釈されるかららしい。
+
+```js
+var undeclared_var;
+console.log(undeclared_var === undefined); // true　例外を発生しない。
+```
+
+このように，後置的に宣言した変数があたかもソースコードの頭で宣言したように見える仕様を **巻き上げ** という。
 
 なんのためにこんな仕様があるのか？[この解説](https://qiita.com/Stranger_31/items/20baef019c117c3180d9)によれば，
 
 > ✏️ かつての JS は，関数を使う時はあらかじめ関数を宣言しておかないといけなかった。でも，関数を呼び出すコードよりも下のほうに関数宣言したいお気持ちもあったので，それができるようにした。
 > その副作用として， var で宣言した変数についても「巻き上げ」が起こることになった。
 
-だそうです。なお，`const`，`let` で後出し宣言した場合は，巻き上げは起こらず，ちゃんと例外が発生します。以下に例を示します。
+だそうです。なお，`const`，`let` で後出し宣言した場合は，巻き上げは起こらず，ちゃんと例外が発生する。以下に例を示す。
 
 ```js
-var あ;
-console.log(あ === undefined);  // ReferenceError
-const あ = "a";
-console.log(あ)  // a
+console.log(undeclared_var === undefined); // ReferenceError になる
+const undeclared_var;
 ```
 
 ### 変数名に Unicode 文字列が使える
+
 例）
 ```js
 const 俺の名前 = '田中太郎';
@@ -71,9 +75,9 @@ console.log(俺の名前);
 
 ### `const` で宣言されたオブジェクトの挙動
 
-`const`  で宣言されたとしても，オブジェクトの**プロパティ**は保護されません。
+`const` で宣言されたとしても，オブジェクトのプロパティは保護されない。
 
-以下の例のように，プロパティは書き換えられます：
+以下の例のように，プロパティは書き換えられる：
 
 ```js
 const MY_ARRAY = ['HTML','CSS'];
@@ -95,6 +99,7 @@ console.log(+a + +a); // 22
 ### `let` と `const` のスコープ
 
 **ECMAScript 2015 ** からは、`let` や `const` による変数宣言はブロックスコープとなる。
+
 ```js
 var global = 'トップレベルのグローバル変数';
 let local = 'トップレベルのローカル変数';
@@ -108,7 +113,7 @@ console.log(local); // トップレベルのローカル変数
 
 ### `false` をとりうる値
 
-以下の値は  `false`  と評価される (また、[Falsy](https://developer.mozilla.org/ja/docs/Glossary/Falsy)  な値と呼ばれています)。
+以下の値は  `false`  と評価される ([Falsy](https://developer.mozilla.org/ja/docs/Glossary/Falsy)  な値と呼ばれている)。
 -   `false`
 -   `undefined`
 -   `null`
