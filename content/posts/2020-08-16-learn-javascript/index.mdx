@@ -251,4 +251,62 @@ for (let i of arr) {
 }
 ```
 
-続く...
+### 関数の挙動
+
+⚠️ 関数にオブジェクトを渡し，関数内でオブジェクトのプロパティを変更すると
+その変更はグローバルな値に変更を与える。注意。
+
+```js
+function modifyObj(obj) {
+  obj.name = '田中太郎';
+}
+
+var obj = {name: '田中花子'};
+console.log(obj.name); // 田中花子
+
+modifyObj(obj);
+console.log(obj.name); // 田中太郎
+```
+
+### 関数式
+
+関数に名前をつけて，関数内で自身を参照できる。階乗の計算は以下のようにシンプルにかける：
+
+```js
+var factorial = function fac(n) {
+  return n<2 ? 1 : n*fac(n-1)
+};
+console.log(factorial(5)); // 120
+```
+
+条件によって関数を定義したりできる：
+
+```js
+var func;
+if (type == 'max') {
+   func = function(array) {
+     return array.max;
+   }
+}
+```
+
+### 関数のスコープ
+
+関数の内部で宣言された変数は外部からアクセスできない。
+
+```js
+function scope() {
+  var unaccessible = 100;
+}
+console.log(unaccessible);  // ReferenceError
+```
+
+一方，関数が定義されたスコープ内の変数には，その関数からアクセスすることができる。
+
+```js
+var accessible = 100;
+scope();
+function scope() {
+  console.log(accessible);  // 100
+}
+```
