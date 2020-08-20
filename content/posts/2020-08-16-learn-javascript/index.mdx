@@ -310,3 +310,19 @@ function scope() {
   console.log(accessible);  // 100
 }
 ```
+
+### 再帰関数
+
+DOM ツリーの全てのノードを取得するのに再帰を使うと簡単にできる：
+
+```js
+function walkTree(node) {
+  if (node == null) // 
+    return;
+  // ノードに対し処理を行う
+  for (var i = 0; i < node.childNodes.length; i++) {
+    walkTree(node.childNodes[i]);
+  }
+}
+```
+
