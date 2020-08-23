@@ -8,40 +8,44 @@ excerpt: はじめての投稿。
 
 ## Hello, World!
 
-ブログを開設してみたよ。
+ブログを開設してみたよ。このブログに関する少し技術的な話を書きます。
 
-## ブログ開設のきっかけ
+### ブログ開設のきっかけ
 
-Microsoft Ignite 2019 のあるセッションで，
-「[GatsbyJS](https://www.gatsbyjs.org/) で *JAMStack* するといいぞい」
+[Microsoft Ignite 2019](https://insider.windows.com/ja-jp/articles/microsoft-ignite-2019) という
+カンファレンスに参加していろんなセッションを聴講したのですが，とあるセッションで 「[GatsbyJS](https://www.gatsbyjs.org/) で *JAMStack* するといいぞい」
 みたいな話をチョロっと聞いて雰囲気で完全に理解してしまった（完全に理解したの[定義](https://giwiz-rts.c.yimg.jp/im_siggiruZjtn2y533J7Z7zjKIYw---x600-y315-ifmgif-prix/p/rts/EQ5JuOhxwzDusazqKAupFNfH_Y6vf6Fka1HM666sknc2q5A67af3a_3ujkXly8v4jHXJKA--)）ので，
-ドキュメント読みながら静的ウェブページ（つまりブログ）を構築してみました。
+ドキュメントを読みながら静的ウェブページ（つまりブログ）を構築してみました。
 
-## 何を使ってるのか
+### ブログの開発に使っているもの
 
-- *フレームワーク*
+- *フレームワーク（静的サイトジェネレーター）*
 
-  Gatsby という React 製フレームワーク。Web フロントエンド開発のベストプラクティスが詰まっているらしい（[※](https://tsukamon.com/blogs/3)）
+  Gatsby というフレームワークを使っています。Web フロントエンド開発のベストプラクティスが詰まっている，今一番？イケてる静的サイトジェネレーター（[※](https://tsukamon.com/blogs/3)）。
+  
+  Gatsby は React という Web アプリケーションのフレームワークをベースにしていて，React のドキュメントサイトは Gatsby で動いています。
 
-  Gatsby には「テーマ」という概念があり，人が作ったテンプレートを npm パッケージとしてインストールして拡張できます。
-私のこのウェブページは，そのテーマのひとつである [Narative Novela](https://github.com/narative/gatsby-theme-novela) 
-というテーマのスタイルをカスタマイズしてます。  
+  このブログも Gatsby で動いていますが，1から全部作ったわけではなく，人が作って公開しているテンプレートをベースにカスタマイズしています。
+  Gatsby には「テーマ」という概念があって，人が作ったテンプレートを npm パッケージとしてインストールして拡張できるんですが，それを使っています。
+  このブログがベースとしているテーマに興味がある人は [Narative Novela](https://github.com/narative/gatsby-theme-novela) を見てみてください。
 
 - *記事の管理*
 
-  記事の管理はこのブログ資産と同じ Git リポジトリで行っています。
-  将来的には Contentful などの CMS （コンテンツ管理システム）に配置して，API で記事を取得できるようにしたいと思っています。
+  このブログ資産と同じ Git リポジトリで行っています。
 
-　記事のマークアップには MDX というのを使っています。Markdown を拡張したやつで，
-  React という JS のフレームワークで書かれたコンポーネントを `import` して使うことができるという特徴を持っています。
+  将来的には，コンテンツを API から取得できるサービスを使って行きたいなぁと思っています。
+
+  記事のマークアップには [MDX](https://mdxjs.com/) というのを使っています。Markdown を拡張したやつで，
+  React コンポーネントを Markdown に `import` して使うことができるという特徴を持っています。
+  まあ，MDX を使っているというより，ベースとなる OSS が MDX を使っていただけですが...😅
 
 - *ウェブサイトのホスティング*
 
-  GitHub Pages を使っています。
+  [GitHub Pages](https://docs.github.com/ja/github/working-with-github-pages/about-github-pages) を使っています。
 
 - *CI/CD*
 
-  自動テスト・自動デプロイ のワークフローを GitHub Actions で行っています。テストには Cypress.io という
-  テスティングフレームワークを使っています。
+  テスト・デプロイ のワークフローを GitHub Actions で行っています。テストには Cypress.io という
+  フレームワークを使っています。
 　
   👉　[関連記事: GitHub Actions ＋ Cypress.io でこのブログを CI する](/GitHub-Actions-Cypress.io-CI/)
