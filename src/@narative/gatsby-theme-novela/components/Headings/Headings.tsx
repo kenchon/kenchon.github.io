@@ -15,7 +15,6 @@ const commonStyles = p => css`
 `;
 
 const h1 = styled.h1`
-  // word-break: keep-all;
   word-break: break-word;
   font-size: 52px;
   line-height: 2;
@@ -38,7 +37,12 @@ const h2 = styled.h2`
   word-break: break-word;
   font-size: 32px;
   line-height: 2;
-  background:linear-gradient(transparent 90%, ${ p => p.theme.colors.underline } 50%); 
+
+  background: #dfefff;
+  box-shadow: 0px 0px 0px 5px #dfefff;
+  border: dashed 2px white;
+  padding: 0.2em 0.5em;
+  
   ${commonStyles};
 
   ${mediaqueries.desktop`
@@ -60,7 +64,13 @@ const h3 = styled.h3`
   word-break: break-word;
   font-size: 21px;
   line-height: 2.5;
-  background:linear-gradient(transparent 90%, #03a1fc 0%);
+
+  padding: 0.1em;/*文字周りの余白*/
+  padding-left: 0.5em;
+  color: #494949;/*文字色*/
+  background: #fffaf4;/*背景色*/
+  border-left: solid 5px #ffaf58;/*左線（実線 太さ 色）*/
+
   ${commonStyles};
 
   ${mediaqueries.tablet`
