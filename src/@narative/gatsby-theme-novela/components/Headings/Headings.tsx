@@ -38,8 +38,8 @@ const h2 = styled.h2`
   font-size: 32px;
   line-height: 2;
 
-  background: #dfefff;
-  box-shadow: 0px 0px 0px 5px #dfefff;
+  background-color: ${p => p.theme.colors.h2Background};
+  box-shadow: 0px 0px 0px 5px ${p => p.theme.colors.h2Background};
   border: dashed 2px white;
   padding: 0.2em 0.5em;
   
@@ -68,7 +68,7 @@ const h3 = styled.h3`
   padding: 0.1em;/*文字周りの余白*/
   padding-left: 0.5em;
   color: #494949;/*文字色*/
-  background: #fffaf4;/*背景色*/
+  background-color: ${p => p.theme.colors.h3Background};
   border-left: solid 5px #ffaf58;/*左線（実線 太さ 色）*/
 
   ${commonStyles};
