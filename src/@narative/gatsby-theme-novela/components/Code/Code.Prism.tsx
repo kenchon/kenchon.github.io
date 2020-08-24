@@ -178,7 +178,7 @@ const Container = styled.div`
     background-color: #eee,
     color: #333,
     padding: 0.1em 0.4em,
-    font-family: 'SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace'
+    font-family: '游ゴシック体, YuGothic, "YuGothic M", sans-serif, SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace'
   }
 
   ${mediaqueries.desktop`
