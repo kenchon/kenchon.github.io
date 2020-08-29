@@ -7,6 +7,7 @@ const Blockquote = styled.blockquote`
   color: ${p => p.theme.colors.articleText};
   // font-size: ${p => p.theme.fonts.size};
   font-weight: normal;
+  max-width: 780px;
 
   padding: 30px 30px 30px 30px;
   // font-style: italic;
@@ -40,7 +41,7 @@ const Blockquote = styled.blockquote`
   }
 
   & > p {
-    font-family: ${p => p.theme.fonts.sansSerif};
+    font-family: ${p => p.theme.fonts.YuGothic};
     // max-width: 880px !important;
     // padding-right: 100px;
     padding-bottom: 0;
