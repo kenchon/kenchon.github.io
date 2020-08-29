@@ -103,7 +103,57 @@ excerpt: 『レガシーコードからの脱却』〜第9章より〜
 
 メソッドシグネチャなどは，カプセル化の良い方法である。これは「実装ではなくインタフェースをプログラムする」というパターンである。
 
-*必要なものだけを公開し，それ以外は隠すこと。*
+### カプセル化の例
+
+以下のようなリストを HTML のタグ付きのリストに変換して標準出力するプログラムを考える。
+
+入力
+```python
+length_list = [186, 178, 156, 188]
+```
+出力
+```html
+<ul>
+	<li>186</li>
+	<li>178</li>
+	<li>156</li>
+	<li>188</li>
+</ul>
+```
+
+*カプセル化していない場合* のプログラム
+```python
+# リストに入った数字を，HTML タグつきのフォーマットにする
+length_list = [186, 178, 156, 188]
+
+list_with_tag = '<ul>\n'
+for number in length_list:
+    list_with_tag += f'\t<li>{number}</li>\n'
+list_with_tag += '</ul>'
+
+print(list_with_tag)
+```
+
+この 4~7 行目は，実装の詳細であり，抽象度が下がる。
+
+この部分はメソッド化した方が見通しが良くなるし，再利用性が高くなる。
+
+```python
+def get_list_with_tag(number_list: list) -> str:
+    
+    list_with_tag = '<ul>\n'
+    for number in number_list:
+        list_with_tag += f'\t<li>{number}</li>\n'
+    list_with_tag += '</ul>'
+    
+    return list_with_tag
+
+# リストに入った数字を，HTML タグつきのフォーマットにする
+
+length_list = [186, 178, 156, 188]
+list_with_tag = get_list_with_tag(length_list)
+print(list_with_tag)
+```
 
 ### 高品質のコードは断定的である。
 
