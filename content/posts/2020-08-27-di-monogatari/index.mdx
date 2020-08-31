@@ -1,0 +1,51 @@
+---
+title: 依存性逆転物語  / DI Story
+author: Kenya Hondoh
+date: 2020-08-31
+hero: ./image.png
+excerpt: 依存性逆転の原則完全理解物語
+---
+
+## 依存性逆転の原則
+
+> 上位のモジュールは下位のモジュールに依存してはならない。どちらのモジュールも「抽象」に依存すべきである
+
+## 何が嬉しいのか
+
+👉 *1モジュール変更するために，1モジュールだけ変更すればよくなる。*
+
+ここでは，そうならない状況を考えてみて，依存性逆転の原則を適用する喜びを噛み締める。
+
+## PDF を印刷したい A出版社
+
+あるところに，「PDF を印刷するソフトが欲しい」という A出版社 のお客さんがいました。
+
+そこで A出版社 のために，開発者は以下の関係で示される設計によって，PDF を印刷できるような仕組みを作りました。
+
+![](https://lh3.googleusercontent.com/_EP1Dj6OW-38qplq6vV6yB6ELSQ5TCPJdtrW2NJicr5bRvHDyyQJ5xwnXyajYRRhzEZlgaOJ6XU9SnvvM_KgEzAqtqb31Me7iC_ZCpGxOR1vq_MRD0Vs6Kf7hbpbyJPh5buWlrRJu-w)
+
+これで A出版社 は満足しました。
+
+## JPG を印刷したい B写真館
+
+B写真館 は「JPG を印刷するソフトが欲しいな〜」と思っていました。
+
+そこで開発者は，B写真館のために，JPG を印刷するソフトを作ろうと思いました。
+
+しかし，以前 A出版社 のために作った `Printer` クラスが使いまわせそうだったので，以下のような構成で JPG も印刷できるようにしました。
+
+![](https://lh3.googleusercontent.com/ZOKuNkUSTdneEYJDb0bpTCVPZSCl0Kec4CunhfPP3L3saZVlIBvN2I_fnliWnucEKWEKcPcP9fNkUseTj0kHBGOcfxrUDlWvi98PdLsx_UaLA48eOPGIGGNvVIp2lZaJGpx5lKofIkU)
+
+## トラブル発生
+
+B写真館が `Printer` を使えるようにするために開発者は `Printer` クラスに変更を加えました。
+
+よって，A出版社 が使っている `Printer` も更新する必要が出てきました。
+
+開発者は A出版社 の方に，「`Printer` に JPG を印刷できる機能を追加したから，一度マシンを停止します」と言いました。
+
+すると A出版社 は「なぜ他のお客さんのために加えた変更のために，我々も影響をうけなきゃいけないの？」とクレームをつけてきました。
+
+開発者も「確かに...」となっています。
+
+どうすればよかったのでしょうか？
