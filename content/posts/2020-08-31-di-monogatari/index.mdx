@@ -6,23 +6,26 @@ hero: ./image.png
 excerpt: Dependency Inversion Story 完全に理解したかもしれない
 ---
 
-## 依存性逆転の原則
+### 依存性逆転の原則
 
 > 上位のモジュールは下位のモジュールに依存してはならない。どちらのモジュールも「抽象」に依存すべきである
 
-## 何が嬉しいのか
+### 何が嬉しいのか
 
 👉 *1モジュール変更するために，1モジュールだけ変更すればよくなる。*
 
 ここでは，そうならない状況を考えてみて，依存性逆転の原則を適用する喜びを噛み締める。
 
-## PDF を印刷したい A出版社
+### PDF を印刷したい A出版社
 
 あるところに，「PDF を印刷するソフトが欲しい」という A出版社 のお客さんがいました。
 
 そこで A出版社 のために，開発者は以下の関係で示される設計によって，PDF を印刷できるような仕組みを作りました。
 
 ![](https://lh3.googleusercontent.com/_EP1Dj6OW-38qplq6vV6yB6ELSQ5TCPJdtrW2NJicr5bRvHDyyQJ5xwnXyajYRRhzEZlgaOJ6XU9SnvvM_KgEzAqtqb31Me7iC_ZCpGxOR1vq_MRD0Vs6Kf7hbpbyJPh5buWlrRJu-w)
+
+ソースコード：
+
 
 ```python
 class Printer:
@@ -43,7 +46,7 @@ class PDF:
 
 これで A出版社 は満足しました。
 
-## JPG を印刷したい B写真館
+### JPG を印刷したい B写真館
 
 B写真館 は「JPG を印刷するソフトが欲しいな〜」と思っていました。
 
@@ -53,7 +56,7 @@ B写真館 は「JPG を印刷するソフトが欲しいな〜」と思って�
 
 ![](https://lh3.googleusercontent.com/ZOKuNkUSTdneEYJDb0bpTCVPZSCl0Kec4CunhfPP3L3saZVlIBvN2I_fnliWnucEKWEKcPcP9fNkUseTj0kHBGOcfxrUDlWvi98PdLsx_UaLA48eOPGIGGNvVIp2lZaJGpx5lKofIkU)
 
-ソースコードは以下の感じ
+ソースコード：
 
 ```python
 class Printer:
@@ -83,7 +86,7 @@ class JPG:
         return print(f"This is a JPG file! (file_name: {pdf_file.file_name})")
 ```
 
-## トラブル発生
+### トラブル発生
 
 B写真館が `Printer` を使えるようにするために開発者は `Printer` クラスに変更を加えました。
 
@@ -97,7 +100,7 @@ B写真館が `Printer` を使えるようにするために開発者は `Printe
 
 どうすればよかったのでしょうか？
 
-## 解決策 → 依存関係をどうにかする
+### 解決策 → 依存関係をどうにかする
 
 開発者が考えた構成では，`Printer` が，印刷する文書 `PDF`, `JPG` の個別の事情を「知り過ぎた」構成になっています(`print_PDF()`, `print_JPG()`)。
 
@@ -126,7 +129,7 @@ B写真館が `Printer` を使えるようにするために開発者は `Printe
 
 そして，**上位クラスは下位クラスに依存しない** ようになりました。
 
-簡単なコードで示すと，以下のようになります：
+ソースコード：
 
 ```python
 
@@ -169,20 +172,6 @@ class JPG(Printable):
     def print_to_paper(self):
         # JPG 特有の処理
         return print(f"What a wonderful JPG output! (file_name = {self.file_name})")
-```
-
-実行結果
-
-```python
-# PDF を印刷
-printable_pdf = PDF(file_name="dependency_inversion.pdf")
-printable_pdf.print_to_paper() 
-# -> This is a beautiful PDF output! (file_name = dependency_inversion.pdf)
-
-# JPG を印刷
-printable_jpg = JPG(file_name="kanzen_rikai.jpg")
-printable_jpg.print_to_paper() 
-# -> What a wonderful JPG output! (file_name = kanzen_rikai.jpg)
 ```
 
 こうすると，もし新たに `HTML` 形式のファイルを印刷したくなったとしても，変更が加わるのは「新たに追加する `HTML` クラス」だけになりました。
