@@ -24,6 +24,23 @@ excerpt: 依存性逆転の原則完全理解物語
 
 ![](https://lh3.googleusercontent.com/_EP1Dj6OW-38qplq6vV6yB6ELSQ5TCPJdtrW2NJicr5bRvHDyyQJ5xwnXyajYRRhzEZlgaOJ6XU9SnvvM_KgEzAqtqb31Me7iC_ZCpGxOR1vq_MRD0Vs6Kf7hbpbyJPh5buWlrRJu-w)
 
+```python
+class Printer:
+    def __init__(self):
+        pass
+    
+    def print_PDF(self, pdf_file: PDF):
+        return pdf_file.print_to_paper()
+        
+class PDF:
+    def __init__(self, file_name: str):
+        self.file_name = file_name
+    
+    def print_to_paper(self):
+        # PDF 特有の処理
+        return print(f"This is a PDF file! (file_name: {pdf_file.file_name})")
+```
+
 これで A出版社 は満足しました。
 
 ## JPG を印刷したい B写真館
@@ -35,6 +52,36 @@ B写真館 は「JPG を印刷するソフトが欲しいな〜」と思って�
 しかし，以前 A出版社 のために作った `Printer` クラスが使いまわせそうだったので，以下のような構成で JPG も印刷できるようにしました。
 
 ![](https://lh3.googleusercontent.com/ZOKuNkUSTdneEYJDb0bpTCVPZSCl0Kec4CunhfPP3L3saZVlIBvN2I_fnliWnucEKWEKcPcP9fNkUseTj0kHBGOcfxrUDlWvi98PdLsx_UaLA48eOPGIGGNvVIp2lZaJGpx5lKofIkU)
+
+ソースコードは以下の感じ
+
+```python
+class Printer:
+    def __init__(self):
+        pass
+    
+    def print_PDF(self, pdf_file: PDF):
+        return pdf_file.print_to_paper()
+        
+    def print_JPG(self, jpg_file: JPG):
+        return jpg_file.print_to_paper()
+        
+class PDF:
+    def __init__(self, file_name: str):
+        self.file_name = file_name
+    
+    def print_to_paper(self):
+        # PDF 特有の処理
+        return print(f"This is a PDF file! (file_name: {pdf_file.file_name})")
+    
+class JPG:
+    def __init__(self, file_name: str):
+        self.file_name = file_name
+    
+    def print_to_paper(self):
+        # JPG 特有の処理
+        return print(f"This is a JPG file! (file_name: {pdf_file.file_name})")
+```
 
 ## トラブル発生
 
@@ -50,9 +97,9 @@ B写真館が `Printer` を使えるようにするために開発者は `Printe
 
 どうすればよかったのでしょうか？
 
-## DI 登場
+## 解決策 → 依存関係をどうにかする
 
-上の図では，`Printer` が，印刷する文書 `PDF`, `JPG` の個別の事情を「知り過ぎた」構成になっています。
+開発者が考えた構成では，`Printer` が，印刷する文書 `PDF`, `JPG` の個別の事情を「知り過ぎた」構成になっています(`print_PDF()`, `print_JPG()`)。
 
 しかし，`Printer` では，印刷する対象の個別の知識は取り扱わない方が良さそうに思えます。
 
@@ -62,9 +109,9 @@ B写真館が `Printer` を使えるようにするために開発者は `Printe
 
 ![](https://lh3.googleusercontent.com/ZOKuNkUSTdneEYJDb0bpTCVPZSCl0Kec4CunhfPP3L3saZVlIBvN2I_fnliWnucEKWEKcPcP9fNkUseTj0kHBGOcfxrUDlWvi98PdLsx_UaLA48eOPGIGGNvVIp2lZaJGpx5lKofIkU)
 
-すると，`Printer` という呼び出し元（上位）のクラスが，`PDF`, `JPG` という（下位）クラスに依存していることがわかります。
+すると，`Printer` という呼び出し元（上位）のクラスが，複数の `PDF`, `JPG` という（下位）クラスに依存していることがわかります。
 
-ここで，*依存性逆転の原則* は以下のような示唆を与えます：
+この問題に対して，*依存性逆転の原則* は以下のような示唆を与えます：
 
 - 上位クラスは，下位クラスに依存してはならない。
 - 上位クラス，下位クラスのどちらも，「抽象」に依存すべきである。
@@ -79,12 +126,80 @@ B写真館が `Printer` を使えるようにするために開発者は `Printe
 
 そして，**上位クラスは下位クラスに依存しない** ようになりました。
 
-## それで...?
+簡単なコードで示すと，以下のようになります：
 
-このような構成にすると，もし新たに `HTML` 形式のファイルを印刷したくなったとしても，変更が加わるのは「新たに追加する `HTML` クラス」と「`Docs` クラス」だけになりました。
+```python
+
+from abc import ABC, abstractmethod
+
+# Printer と PDF, JPG の架け橋となる抽象クラス
+class Printable(ABC):
+    def __init__(self):
+            pass
+    
+    @abstractmethod
+    def print_to_paper(self):
+        pass
+    
+# 上位クラス，クライアント
+class Printer:
+    def __init__(self, printable_obj: Printable):
+        self.printable_obj = printable_obj
+            pass
+    
+    def print_to_paper(self):
+        return self.printable_obj.print_to_paper()
+
+# 下位クラス            
+class PDF(Printable):
+    def __init__(self, file_name: str):
+        self.file_name = file_name
+        pass
+    
+    def print_to_paper(self):
+        # PDF 特有の処理
+        return print(f"This is a beautiful PDF output! (file_name = {self.file_name})")
+    
+# 下位クラス     
+class JPG(Printable):
+    def __init__(self, file_name: str):
+        self.file_name = file_name
+        pass
+        
+    def print_to_paper(self):
+        # JPG 特有の処理
+        return print(f"What a wonderful JPG output! (file_name = {self.file_name})")
+```
+
+実行結果
+
+```python
+# PDF を印刷
+printable_pdf = PDF(file_name="dependency_inversion.pdf")
+printable_pdf.print_to_paper() 
+# -> This is a beautiful PDF output! (file_name = dependency_inversion.pdf)
+
+# JPG を印刷
+printable_jpg = JPG(file_name="kanzen_rikai.jpg")
+printable_jpg.print_to_paper() 
+# -> What a wonderful JPG output! (file_name = kanzen_rikai.jpg)
+```
+
+こうすると，もし新たに `HTML` 形式のファイルを印刷したくなったとしても，変更が加わるのは「新たに追加する `HTML` クラス」だけになりました。
 
 つまり，`Printer` クラスには変更を加えることなく，新しい形式のファイルに対応できるようになるということです。
 
-## それでもよくわからん
+※ まあ，上の説明だと色々不十分な点があります。というのも，`Printer` などのモジュールがビルドしたバイナリがお客さんのもとにあるという前提の説明とか省いててごめんだし，
+動的型付け言語の Python であれば `PDF`, `JPG` に同じ名前の関数を持たせて，関数内部の挙動だけ変えれば（ポリモーフィズム），こんな複雑なことしなくても言語の性質でもっとシンプルに書けるとかです。
 
-たぶんそれは，この文書に 1mm も疑似コードがないからです。コードを逐次追加しますのでお待ちください。
+### まとめ
+
+*依存性逆転の原則* とは
+
+> 上位のモジュールは下位のモジュールに依存してはならない。どちらのモジュールも「抽象」に依存すべきである
+
+*何が嬉しいのか*
+
+👉 **1モジュール変更するために，1モジュールだけ変更すればよくなる。**
+
+おわり
