@@ -49,3 +49,42 @@ B写真館が `Printer` を使えるようにするために開発者は `Printe
 開発者も「確かに...」となっています。
 
 どうすればよかったのでしょうか？
+
+## DI 登場
+
+上の図では，`Printer` が，印刷する文書 `PDF`, `JPG` の個別の事情を「知り過ぎた」構成になっています。
+
+しかし，`Printer` では，印刷する対象の個別の知識は取り扱わない方が良さそうに思えます。
+
+なぜなら，あるお客さんのために加えた `Printer` の変更が，他のお客さんにも影響を与えるということが起きるからです。
+
+ここで，このクラス構造をもう一度俯瞰してみてみます。
+
+![](https://lh3.googleusercontent.com/ZOKuNkUSTdneEYJDb0bpTCVPZSCl0Kec4CunhfPP3L3saZVlIBvN2I_fnliWnucEKWEKcPcP9fNkUseTj0kHBGOcfxrUDlWvi98PdLsx_UaLA48eOPGIGGNvVIp2lZaJGpx5lKofIkU)
+
+すると，`Printer` という呼び出し元（上位）のクラスが，`PDF`, `JPG` という（下位）クラスに依存していることがわかります。
+
+ここで，*依存性逆転の原則* は以下のような示唆を与えます：
+
+- 上位クラスは，下位クラスに依存してはならない。
+- 上位クラス，下位クラスのどちらも，「抽象」に依存すべきである。
+
+これを適用したのがこちら：
+
+![](https://lh3.googleusercontent.com/-z2EXKh0EgXXdZuHqPDIPDDroLK_m0760MLYWSmj2QCyviMUBhlC8XHMiZF7H7K1IZQV2MSgR11AjFZpmYzz5QNnrm-vL1iavmRlaSLPeRXzMlWT0MJABaBeoYnNljgqF3awH9LTyWY)
+
+まず，`Docs` という抽象クラスを用意し，下位クラス `PDF`, `JPG` でこれを実装します。
+
+これにより，**上位クラスは抽象に依存** し，**下位クラスも抽象に依存** するようになりました。
+
+そして，**上位クラスは下位クラスに依存しない** ようになりました。
+
+## それで...?
+
+このような構成にすると，もし新たに `HTML` 形式のファイルを印刷したくなったとしても，変更が加わるのは「新たに追加する `HTML` クラス」と「`Docs` クラス」だけになりました。
+
+つまり，`Printer` クラスには変更を加えることなく，新しい形式のファイルに対応できるようになるということです。
+
+## それでもよくわからん
+
+たぶんそれは，この文書に 1mm も疑似コードがないからです。コードを逐次追加しますのでお待ちください。
