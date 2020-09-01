@@ -6,26 +6,34 @@ hero: ./image.png
 excerpt: Dependency Inversion Story 完全に理解したかもしれない
 ---
 
+### 概要
+
+- CLEAN コードという良いコードを書くためのプラクティスがあります。
+- ここで「疎結合なコードはいいぞ」という話があって，どうやって実現するのか色々調べていました。
+- これを実現するための設計指針として，以前勉強した SOLID 原則の「依存性逆転の原則」というのが使えそうだと言うことがわかりました。
+- これらをいい感じにまとめました。
+
 ### 依存性逆転の原則
 
-> 上位のモジュールは下位のモジュールに依存してはならない。どちらのモジュールも「抽象」に依存すべきである
+Dependency Inversion Principle の訳語。本投稿では，DIP と言ったりすることにします。
 
-### 何が嬉しいのか
+#### 意味
 
-👉 *1モジュール変更するために，1モジュールだけ変更すればよくなる。*
+上位のモジュールは下位のモジュールに依存してはならない。どちらのモジュールも「抽象」に依存すべきである。
 
-ここでは，そうならない状況を考えてみて，依存性逆転の原則を適用する喜びを噛み締める。
+最初みたときは，「は？」となりました。
+
+#### 何が嬉しいのか
+
+👉 1モジュール変更するために，1モジュールだけ変更すればよくなる。
+
+この投稿では，そうならない状況を考えてみて，依存性逆転の原則を適用する喜びを噛み締めることを試みる。
 
 ### PDF を印刷したい A出版社
 
 あるところに，「PDF を印刷するソフトが欲しい」という A出版社 のお客さんがいました。
 
-そこで A出版社 のために，開発者は以下の関係で示される設計によって，PDF を印刷できるような仕組みを作りました。
-
-![](https://lh3.googleusercontent.com/_EP1Dj6OW-38qplq6vV6yB6ELSQ5TCPJdtrW2NJicr5bRvHDyyQJ5xwnXyajYRRhzEZlgaOJ6XU9SnvvM_KgEzAqtqb31Me7iC_ZCpGxOR1vq_MRD0Vs6Kf7hbpbyJPh5buWlrRJu-w)
-
-ソースコード：
-
+そこで A出版社 のために，開発者は以下のようなコードを書きました。
 
 ```python
 class Printer:
@@ -44,6 +52,11 @@ class PDF:
         return print(f"This is a PDF file! (file_name: {pdf_file.file_name})")
 ```
 
+クラスの関係図は，以下のようになっています。
+
+![](https://lh3.googleusercontent.com/_EP1Dj6OW-38qplq6vV6yB6ELSQ5TCPJdtrW2NJicr5bRvHDyyQJ5xwnXyajYRRhzEZlgaOJ6XU9SnvvM_KgEzAqtqb31Me7iC_ZCpGxOR1vq_MRD0Vs6Kf7hbpbyJPh5buWlrRJu-w)
+
+
 これで A出版社 は満足しました。
 
 ### JPG を印刷したい B写真館
@@ -52,11 +65,7 @@ B写真館 は「JPG を印刷するソフトが欲しいな〜」と思って�
 
 そこで開発者は，B写真館のために，JPG を印刷するソフトを作ろうと思いました。
 
-しかし，以前 A出版社 のために作った `Printer` クラスが使いまわせそうだったので，以下のような構成で JPG も印刷できるようにしました。
-
-![](https://lh3.googleusercontent.com/ZOKuNkUSTdneEYJDb0bpTCVPZSCl0Kec4CunhfPP3L3saZVlIBvN2I_fnliWnucEKWEKcPcP9fNkUseTj0kHBGOcfxrUDlWvi98PdLsx_UaLA48eOPGIGGNvVIp2lZaJGpx5lKofIkU)
-
-ソースコード：
+そこで以前， A出版社 のために作った `Printer` クラスが使いまわせそうだったので，そうすることにしました。
 
 ```python
 class Printer:
@@ -86,21 +95,25 @@ class JPG:
         return print(f"This is a JPG file! (file_name: {pdf_file.file_name})")
 ```
 
+![](https://lh3.googleusercontent.com/ZOKuNkUSTdneEYJDb0bpTCVPZSCl0Kec4CunhfPP3L3saZVlIBvN2I_fnliWnucEKWEKcPcP9fNkUseTj0kHBGOcfxrUDlWvi98PdLsx_UaLA48eOPGIGGNvVIp2lZaJGpx5lKofIkU)
+
+B写真館 は喜びました。
+
 ### トラブル発生
 
 B写真館が `Printer` を使えるようにするために開発者は `Printer` クラスに変更を加えました。
 
 よって，A出版社 が使っている `Printer` も更新する必要が出てきました。
 
-開発者は A出版社 の方に，「`Printer` に JPG を印刷できる機能を追加したから，一度マシンを停止します」と言いました。
+開発者は A出版社 の方に，「`Printer` に JPG を印刷できる機能を追加したから，一度アプリケーションを停止して更新します」と言いました。
 
-すると A出版社 は「なぜ他のお客さんのために加えた変更のために，我々も影響をうけなきゃいけないの？」とクレームをつけてきました。
+すると A出版社 は「なぜ他のお客さんのために加えた変更のために，我々も影響をうけなきゃいけないの？」と不満そうな顔をしています。
 
 開発者も「確かに...」となっています。
 
 どうすればよかったのでしょうか？
 
-### 解決策 → 依存関係をどうにかする
+### 依存性逆転の原則「上位クラスよ，お前は具象を知り過ぎている。」
 
 開発者が考えた構成では，`Printer` が，印刷する文書 `PDF`, `JPG` の個別の事情を「知り過ぎた」構成になっています(`print_PDF()`, `print_JPG()`)。
 
@@ -114,7 +127,7 @@ B写真館が `Printer` を使えるようにするために開発者は `Printe
 
 すると，`Printer` という呼び出し元（上位）のクラスが，複数の `PDF`, `JPG` という（下位）クラスに依存していることがわかります。
 
-この問題に対して，*依存性逆転の原則* は以下のような示唆を与えます：
+この問題に対して，*依存性逆転の原則（DIP）* は以下のような示唆を与えます：
 
 - 上位クラスは，下位クラスに依存してはならない。
 - 上位クラス，下位クラスのどちらも，「抽象」に依存すべきである。
@@ -180,11 +193,13 @@ class JPG(Printable):
 
 ※ Python であれば `Printable` というインタフェースを使わなくても，型の厳密さを取り除くことでもっとシンプルに書けると思います多分。
 
-### DI でソースコードを疎結合に
+### DIP を実現することで，ソースコードを疎結合に
 
-依存性逆転の原則を適用したことで変更に強くなった `Printer` クラス。
+「依存性逆転の原則」を実現したことで，`Printer` クラスは変更に強くなりました。
 
-ここで，ソフトウェアの変更しやすさのメトリクスである結合度に着目してみます。
+ここで，ソフトウェアの変更しやすさのメトリクスである「結合度」に着目してみます。
+
+あるモジュールが，どのくらい外部のモジュールに依存しているのか（結合しているのか）を表す指標です。
 
 素朴に作成した `Printer` クラスは以下のようになっていました：
 
@@ -202,7 +217,7 @@ class Printer:
 
 ここでは，2つの型(`PDF`, `JPG`)，そして2つの `print_to_paper()` という外部要因に依存していることがわかります。
 
-このクラスの外部モジュールへの結合は4箇所あることがわかります。
+このクラスの外部モジュールへの結合は **4箇所** あることがわかります。
 
 一方，リファクタリングした `Printer` は，
 
@@ -216,9 +231,9 @@ class Printer:
         return self.printable_obj.print_to_paper()
 ```
 
-1つの `Printable` 型と，1つの `print_to_paper()` に依存していて，外部モジュールへの結合は2箇所だけです。
+1つの `Printable` 型と，1つの `print_to_paper()` に依存していて，外部モジュールへの結合は **2箇所** だけです。
 
-このように，リファクタリングによって「結合度」が下がる ＝　疎結合 なクラスになったことがわかります。
+このように「結合度」が下がってるのがわかります。そしてこの状態を，疎結合といいます。
 
 ### まとめ
 
