@@ -134,9 +134,9 @@ B写真館が `Printer` を使えるようにするために開発者は `Printe
 
 これを適用したのがこちら：
 
-![](https://lh3.googleusercontent.com/-z2EXKh0EgXXdZuHqPDIPDDroLK_m0760MLYWSmj2QCyviMUBhlC8XHMiZF7H7K1IZQV2MSgR11AjFZpmYzz5QNnrm-vL1iavmRlaSLPeRXzMlWT0MJABaBeoYnNljgqF3awH9LTyWY)
+![](https://lh3.googleusercontent.com/ab5aIpbrBWEfNwpn6u56XfYUIee7lHtTbfoUw6gQHe5ThNOnhMPjTD7pZqX13BGmf7GmzvHMHcPNx2X4bO7UeiHAgVmmWpbHtu0fTr1iVPUOY90UWBwSNWo18aGmYHcub1GiALo8YwU)
 
-まず，`Docs` という抽象クラスを用意し，下位クラス `PDF`, `JPG` でこれを実装します。
+まず，`Printable` という抽象クラスを用意し，下位クラス `PDF`, `JPG` でこれを実装します。
 
 これにより，**上位クラスは抽象に依存** し，**下位クラスも抽象に依存** するようになりました。
 
