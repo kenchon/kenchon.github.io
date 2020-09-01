@@ -178,8 +178,47 @@ class JPG(Printable):
 
 つまり，`Printer` クラスには変更を加えることなく，新しい形式のファイルに対応できるようになるということです。
 
-※ まあ，上の説明だと色々不十分な点があります。というのも，`Printer` などのモジュールがビルドしたバイナリがお客さんのもとにあるという前提の説明とか省いててごめんだし，
-動的型付け言語の Python であれば `PDF`, `JPG` に同じ名前の関数を持たせて，関数内部の挙動だけ変えれば（ポリモーフィズム），こんな複雑なことしなくても言語の性質でもっとシンプルに書けるとかです。
+※ Python であれば `Printable` というインタフェースを使わなくても，型の厳密さを取り除くことでもっとシンプルに書けると思います多分。
+
+### DI でソースコードを疎結合に
+
+依存性逆転の原則を適用したことで変更に強くなった `Printer` クラス。
+
+ここで，ソフトウェアの変更しやすさのメトリクスである結合度に着目してみます。
+
+素朴に作成した `Printer` クラスは以下のようになっていました：
+
+```python
+class Printer:
+    def __init__(self):
+        pass
+    
+    def print_PDF(self, pdf_file: PDF):
+        return pdf_file.print_to_paper()
+        
+    def print_JPG(self, jpg_file: JPG):
+        return jpg_file.print_to_paper()
+```
+
+ここでは，2つの型(`PDF`, `JPG`)，そして2つの `print_to_paper()` という外部要因に依存していることがわかります。
+
+このクラスの外部モジュールへの結合は4箇所あることがわかります。
+
+一方，リファクタリングした `Printer` は，
+
+```python
+class Printer:
+    def __init__(self, printable_obj: Printable):
+        self.printable_obj = printable_obj
+            pass
+    
+    def print_to_paper(self):
+        return self.printable_obj.print_to_paper()
+```
+
+1つの `Printable` 型と，1つの `print_to_paper()` に依存していて，外部モジュールへの結合は2箇所だけです。
+
+このように，リファクタリングによって「結合度」が下がる ＝　疎結合 なクラスになったことがわかります。
 
 ### まとめ
 
