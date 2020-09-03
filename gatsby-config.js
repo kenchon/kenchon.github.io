@@ -42,7 +42,6 @@ module.exports = {
     //     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || secrets.CONTENTFUL_ACCESS_TOKEN,
     //   },
     // },
-    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
