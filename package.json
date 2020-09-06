@@ -6,7 +6,7 @@
   "scripts": {
     "build": "gatsby build --prefix-paths",
     "dev": "rm -rf .cache && gatsby develop --host=0.0.0.0",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public -b gh-pages",
+    "deploy": "gh-pages -d public -b gh-pages",
     "clean": "gatsby clean",
     "test-headless": "yarn cypress run",
     "test": "npx cypress open",
