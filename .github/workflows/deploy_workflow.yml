@@ -4,12 +4,12 @@
 # 2. If test succeeded, deploy blog on GitHub Pages.
 # 3. After deployed, check if the Deployed page is accessible.
 
-name: Deploy Blog on GitHub Pages
+name: Deploy Blog to GitHub Pages
 
 # Controls when the action will run.
 on:
   push:
-    branches: [ master, develop ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -37,6 +37,17 @@ jobs:
         wait-on: 'http://localhost:8000'
         wait-on-timeout: 600 # Timeout threshold should be > 240 sec because 'yarn dev' stuck
 
+    - name: Main building process
+      # Artifacts are made under /public dir.
+      run: |
+        gatsby build --prefix-paths
+
+    - name: Add meta data for Google Search Console(GSC)
+      env:
+        GSC_VERIFICATION_CODE: ${{ secrets.GSC_VERIFICATION_CODE}}
+      run: |
+         cat "google-site-verification: ${GSC_VERIFICATION_CODE}" > ./public/${GSC_VERIFICATION_CODE}
+
     - name: Deploy Website to GitHub Pages
       env:
         GIT_ADDRESS: ${{ secrets.GIT_ADDRESS }}
@@ -45,7 +56,7 @@ jobs:
         git config --global user.email ${GIT_ADDRESS}
         git config --global user.name ${GIT_USERNAME}
         git remote set-url origin https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_SECRET }}@github.com/kenmikanmi/blog
-        yarn deploy
+        gh-pages -d public -b gh-pages
     
     # TODO: Replace hard-coded production URL
     # - name: Replace baseUrl to Production Path
