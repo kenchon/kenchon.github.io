@@ -40,7 +40,7 @@ jobs:
     - name: Main building process
       # Artifacts are made under /public dir.
       run: |
-        gatsby build --prefix-paths
+        yarn build
 
     - name: Add meta data for Google Search Console(GSC)
       env:
