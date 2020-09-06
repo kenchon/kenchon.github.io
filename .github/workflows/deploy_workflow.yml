@@ -46,7 +46,7 @@ jobs:
       env:
         GSC_VERIFICATION_CODE: ${{ secrets.GSC_VERIFICATION_CODE}}
       run: |
-         cat "google-site-verification: ${GSC_VERIFICATION_CODE}" > ./public/${GSC_VERIFICATION_CODE}
+         echo "google-site-verification: ${GSC_VERIFICATION_CODE}" > ./public/${GSC_VERIFICATION_CODE}
 
     - name: Deploy Website to GitHub Pages
       env:
