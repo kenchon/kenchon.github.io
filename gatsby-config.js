@@ -65,14 +65,6 @@ module.exports = {
       }
     },
     {
-      resolve: `@lekoarts/gatsby-theme-specimens`,
-      options: {
-        contrastGuidelines: `AAA`,
-        codeExample: false,
-        rootFontSize: 32,
-      }
-    },
-    {
       resolve: "@narative/gatsby-theme-novela",
       options: {
         contentPosts: "content/posts",
