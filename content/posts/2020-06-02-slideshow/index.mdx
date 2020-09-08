@@ -30,7 +30,6 @@ curl https://speakerdeck.com/oembed.json\?url={slide_url}
 ```
 
 - `{slide_url}` は，所望する Speakerdeck のスライドの URL を指定してください。
-
 - `curl` 使わず，そのまま上の URL をブラウザに入力しても取得できます。
 
 この API を投げると，JSON が帰ってきます。その JSON に `html` というキーがあると思います。これが上記の HTML ソースです。
@@ -72,7 +71,7 @@ curl https://speakerdeck.com/oembed.json\?url={slide_url}
 このブログでは，マークアップに MDX というのを使っています。MDX というのは *JSX embedded in Markdown*，
 はしょっていうと，React コンポーネントをマークダウンに埋め込んで使えるフォーマット形式です。
 
-先ほどの5行の HTML を，React コンポーネントにして，以下のような感じで1行でいい感じになります：
+先ほどの長い HTML を React コンポーネントにして，以下のような感じで Markdown に埋め込めるようになります：
 
 ```jsx
 <Slide src="https://speakerdeck.com/player/{slide_id}"/>
