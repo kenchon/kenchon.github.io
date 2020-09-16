@@ -13,28 +13,31 @@ excerpt: MDX に埋め込むためのコンポーネントをつくる。
 
 ### 方法
 
-以下の構造の HTML を貼り付けます。
+埋め込み用の HTML は，以下の API から取得できます。
+
+```bash
+https://speakerdeck.com/oembed.json\?url={slide_url}
+```
+
+`{slide_url}` には，Speakerdeck のスライドページの URL を指定してください。
+
+これをブラウザに入力するなり `curl` で GET すると，json が帰ってきます。その json に [こんな感じ 🔍](https://speakerdeck.com/oembed.json/?url=https://speakerdeck.com/kenmikanmi/emarugorizumu-from-machine-learning-a-probabilistic-perspective)
+で，`html` というキーがあるのがわかると思います。これが埋め込み用の HTML です。
+
+構造は以下のような感じになってます。
 
 ```html
 <div style="{div_styles}">
-  <iframe src="https://speakerdeck.com/player/{slide_id}"
+  <iframe src="//speakerdeck.com/player/{slide_id}"
     style="{iframe_styles}">
   </iframe>
 </div>
 ```
 
-上記の HTML のソースは，以下の API を投げることで取得できます。
+注：`{slide_id}` は `{slide_url}` とは異なるものです。
 
-```bash
-curl https://speakerdeck.com/oembed.json\?url={slide_url}
-```
 
-- `{slide_url}` は，所望する Speakerdeck のスライドの URL を指定してください。
-- `curl` 使わず，そのまま上の URL をブラウザに入力しても取得できます。
-
-この API を投げると，JSON が帰ってきます。その JSON に `html` というキーがあると思います。これが上記の HTML ソースです。
-
-このブログでは，`style` を以下のようにしていい感じにしています。
+参考までにこのブログでは，style を以下のようにしてます。
 
 ```html
 <div style="
@@ -48,7 +51,7 @@ curl https://speakerdeck.com/oembed.json\?url={slide_url}
   top: 50%;"
 >
   <iframe 
-    src="https://speakerdeck.com/player/0bf3f3abf9044ff9be9f752d8028ff0d?slide=18"
+    src="//speakerdeck.com/player/0bf3f3abf9044ff9be9f752d8028ff0d?slide=18"
     style="
       position: absolute;
       top: 0;
@@ -71,13 +74,14 @@ curl https://speakerdeck.com/oembed.json\?url={slide_url}
 このブログでは，マークアップに MDX というのを使っています。MDX というのは *JSX embedded in Markdown*，
 はしょっていうと，React コンポーネントをマークダウンに埋め込んで使えるフォーマット形式です。
 
-先ほどの長い HTML を React コンポーネントにして，以下のような感じで Markdown に埋め込めるようになります：
+さっきの HTML のあれをコンポーネント化すると，以下のような感じで Markdown に埋め込めるようになります。
 
+例）
 ```jsx
 <Slide src="https://speakerdeck.com/player/{slide_id}"/>
 ```
 
-定義したコンポーネントは以下のような感じ：
+定義したコンポーネントは以下です。
 
 ```jsx
 import React from 'react';
