@@ -3,7 +3,7 @@ import mediaqueries from '@styles/media';
 
 const UnorderedList = styled.ul`
   list-style: none;
-  line-height: 1.8;
+  line-height: 1.4;
   counter-reset: list;
   color: ${p => p.theme.colors.articleText};
   position: relative;
