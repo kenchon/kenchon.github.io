@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import mediaqueries from "@styles/media";
 
 const Paragraph = styled.p`
-  line-height: 2;
+  line-height: 1.75;
   font-size: 18px;
   color: ${p => p.theme.colors.articleText};
   font-family: ${p => p.theme.fonts.sansSerif};
