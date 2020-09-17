@@ -69,7 +69,6 @@ const RoundedImage = styled(Image)`
 
 const Heading = styled.h1`
   font-size: 38px;
-  font-family: ${p => p.theme.fonts.sansSerif};
   color: ${p => p.theme.colors.primary};
   margin-bottom: 15px;
   font-weight: 600;
@@ -86,7 +85,6 @@ const Subheading = styled.p`
   max-width: 780px;
   color: ${p => p.theme.colors.grey};
   font-size: 18px;
-  font-family: ${p => p.theme.fonts.sansSerif};
   line-height: 1.4;
   text-align: left;
 

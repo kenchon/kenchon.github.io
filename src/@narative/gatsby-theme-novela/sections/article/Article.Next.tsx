@@ -161,7 +161,6 @@ const Title = styled(Headings.h1)`
   line-height: 1.4;
   margin-bottom: ${p => (p.hasOverflow ? "45px" : "10px")};
   color: ${p => p.theme.colors.primary};
-  font-family: ${p => p.theme.fonts.serif};
   transition: color 0.3s ease-in-out;
   ${limitToTwoLines};
 
