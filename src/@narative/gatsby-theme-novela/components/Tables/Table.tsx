@@ -9,11 +9,11 @@ const StyledTable = styled.table`
   font-family: ${p => p.theme.fonts.sansSerif};
   transition: ${p => p.theme.colorModeTransition};
   background: ${p => p.theme.colors.card};
-  margin: 45px auto 85px;
+  margin: 20px auto 20px;
   width: 100%;
-  max-width: 1004px;
+  max-width: 780px;
   border: 1px solid ${p => p.theme.colors.horizontalRule};
-  border-radius: 5px;
+  border-radius: 10px;
   overflow: hidden;
   border-collapse: separate;
 
