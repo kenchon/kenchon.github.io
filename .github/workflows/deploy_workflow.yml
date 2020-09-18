@@ -20,15 +20,15 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-18.04
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    # # Steps represent a sequence of tasks that will be executed as part of the job
+    # steps:
+    # # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    # - uses: actions/checkout@v2
 
-    - name: Lint Code Base
-      uses: github/super-linter@v2.0.0
-      env:
-        VALIDATE_JSON: false
+    # - name: Lint Code Base
+    #   uses: github/super-linter@v2.0.0
+    #   env:
+    #     VALIDATE_JSON: false
 
     - name: Run e2e test on GitHub Actions agent machine
       uses: cypress-io/github-action@v1.16.1
