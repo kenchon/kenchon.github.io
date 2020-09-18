@@ -44,8 +44,8 @@ const BioTextContainer = styled.div`
 const BioAvatar = styled.div`
   display: block;
   position: relative;
-  height: 40px;
-  width: 40px;
+  height: 80px;
+  width: 80px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.25);
   margin-right: 16px;
@@ -56,8 +56,8 @@ const BioAvatar = styled.div`
     position: absolute;
     left: -5px;
     top: -5px;
-    width: 50px;
-    height: 50px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     border: 1px solid rgba(0, 0, 0, 0.25);
   }
@@ -78,8 +78,8 @@ const RoundedImage = styled(Image)`
 `;
 
 const BioAvatarInner = styled.div`
-  height: 40px;
-  width: 40px;
+  height: 80px;
+  width: 80px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.25);
   margin-right: 16px;
@@ -97,9 +97,10 @@ const BioName = styled.p`
 
 const BioText = styled.p`
   max-width: 600px;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.45;
   color: ${p => p.theme.colors.grey};
+  font-weight: 600;
 
   a {
     color: ${p => p.theme.colors.grey};
