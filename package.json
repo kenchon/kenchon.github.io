@@ -13,7 +13,6 @@
     "template": "cp -r content/drafts/2020-00-00-title content/posts/$(date +%Y-%m-%d)-title && cd content/posts/$(date +%Y-%m-%d)-title"
   },
   "dependencies": {
-    "@lekoarts/gatsby-theme-specimens": "^2.1.1",
     "@narative/gatsby-theme-novela": "^0.*",
     "@types/styled-components": "^5.1.0",
     "contentful-cli": "^1.4.6",
