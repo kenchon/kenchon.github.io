@@ -52,6 +52,7 @@ jobs:
       env:
         GIT_SECRET: ${{ secrets.GIT_SECRET }}
         GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+        GIT_ADDRESS: ${{ secrets.GIT_ADDRESS }} 
       run: |
         git config --global user.email ${GIT_ADDRESS}
         git config --global user.name ${GIT_USERNAME}
