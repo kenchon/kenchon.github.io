@@ -50,7 +50,7 @@ jobs:
 
     - name: Deploy Website to GitHub Pages
       env:
-        GIT_ADDRESS: ${{ secrets.GIT_ADDRESS }}
+        GIT_SECRET: ${{ secrets.GIT_SECRET }}
         GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
       run: |
         git config --global user.email ${GIT_ADDRESS}
