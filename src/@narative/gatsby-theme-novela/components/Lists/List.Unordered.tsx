@@ -3,11 +3,11 @@ import mediaqueries from '@styles/media';
 
 const UnorderedList = styled.ul`
   list-style: none;
-  line-height: 1.4;
+  line-height: 1.4em;
   counter-reset: list;
   color: ${p => p.theme.colors.articleText};
   position: relative;
-  padding: 6px 0px 10px 35px;
+  padding: 6px 0px 0px 35px;
   transition: ${p => p.theme.colorModeTransition};
   margin: 0 auto;
   font-size: 18px;

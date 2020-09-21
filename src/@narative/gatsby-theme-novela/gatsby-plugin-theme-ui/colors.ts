@@ -10,7 +10,7 @@ export default {
   accent: "#6166DC",
   hover: "rgba(0, 0, 0, 0.07)",
   gradient: "linear-gradient(180deg, rgba(217, 219, 224, 0) 0%, #D9DBE0 100%)",
-  articleText: "#08080B",
+  articleText: "#333",
   track: "rgba(8, 8, 11, 0.3)",
   progress: "#000",
   card: "#fff",
