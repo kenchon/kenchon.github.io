@@ -3,23 +3,28 @@ import mediaqueries from "@styles/media";
 
 const Blockquote = styled.blockquote`
   transition: ${p => p.theme.colorModeTransition};
-  margin: 15px auto 50px;
+  margin: 15px auto 20px;
   color: ${p => p.theme.colors.articleText};
   // font-size: ${p => p.theme.fonts.size};
   font-weight: normal;
   max-width: 780px;
+  position: relative;
+	width: 90%;
+	border-right: 2px solid ${p => p.theme.colors.quoteBorder};
+	border-left: 7px solid ${p => p.theme.colors.quoteBorder};
+	background: #ffffff;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.3);
 
   padding: 30px 30px 30px 30px;
   // font-style: italic;
   // 背景色が dark/light で切り替わるように設定
   background-color: ${p => p.theme.colors.quoteBackground};
-  foreground-color: black;
-  border-radius: 10px;
-  border: solid;
+
+  /* border: solid;
   padding-top: 1em;
-  padding-bottom: 1em;
-  border-color: ${p => p.theme.colors.quoteBorder};
-  color: black;
+  padding-bottom: 1em; */
+  /* border-color: ${p => p.theme.colors.quoteBorder}; */
+  /* color: black; */
 
   ${mediaqueries.tablet`
     margin: 10px auto 35px;
