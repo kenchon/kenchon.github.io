@@ -55,9 +55,15 @@ jobs:
       run: |
         git config --global user.email ${GIT_ADDRESS}
         git config --global user.name ${GIT_USERNAME}
-        git remote set-url origin https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_SECRET }}@github.com/kenmikanmi/blog
+        git remote set-url origin https://${GIT_USERNAME}:${GIT_SECRET}@github.com/kenmikanmi/blog
         yarn deploy
-    
+        
+    - name: Submit Updated Sitemap to Google Search Console
+      env:
+        WEBSITE_ENDPOINT: ${{ secrets.WEBSITE_ENDPOINT }}    
+      run: |
+        curl https://www.google.com/ping?sitemap=${WEBSITE_ENDPOINT}
+        
     # TODO: Replace hard-coded production URL
     # - name: Replace baseUrl to Production Path
     #   run: |
