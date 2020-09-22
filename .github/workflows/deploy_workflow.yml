@@ -1,48 +1,43 @@
-# This is a Deployment Workflow of Blog Page:
-
-# 1. Execute e2e test on GitHub Actions agent machine.
-# 2. If test succeeded, deploy blog on GitHub Pages.
-# 3. After deployed, check if the Deployed page is accessible.
-
+###############################################################################################
 name: Deploy Blog to GitHub Pages
+###############################################################################################
+# OVERVIEW OF THE WORKFLOW
+# - Execute e2e test.
+# - Main building process to make artifacts under /public dir.
+# - Add verification file for Google Search Console(GSC) to track search performance.
+# - Deploy Website to GitHub Pages. The artifacts under /public are pushed to gh-pages branch.
+# - Submit Updated Sitemap to Google Search Console in order to index deployed page.
+# - Check if the deployed website is accessible.
+###############################################################################################
 
-# Controls when the action will run.
+# WHEN TO RUN THIS WORKFLOW
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
 
-# CI workflow
+# WORKFLOW
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-18.04
-
-    # # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # - name: Lint Code Base
-    #   uses: github/super-linter@v2.0.0
-    #   env:
-    #     VALIDATE_JSON: false
-
-    - name: Run e2e test on GitHub Actions agent machine
+    - name: Run e2e test
       uses: cypress-io/github-action@v1.16.1
       with:
         start: yarn dev
         wait-on: 'http://localhost:8000'
-        wait-on-timeout: 600 # Timeout threshold should be > 240 sec because 'yarn dev' stuck
+        wait-on-timeout: 120 # this is enough "yarn dev" to finish
 
     - name: Main building process
       # Artifacts are made under /public dir.
       run: |
         yarn build
 
-    - name: Add meta data for Google Search Console(GSC)
+    - name: Add verification file for Google Search Console(GSC)
       env:
         GSC_VERIFICATION_CODE: ${{ secrets.GSC_VERIFICATION_CODE}}
       run: |
@@ -52,7 +47,7 @@ jobs:
       env:
         GIT_SECRET: ${{ secrets.GIT_SECRET }}
         GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
-        GIT_ADDRESS: ${{ secrets.GIT_ADDRESS }} 
+        GIT_ADDRESS: ${{ secrets.GIT_ADDRESS }}
       run: |
         git config --global user.email ${GIT_ADDRESS}
         git config --global user.name ${GIT_USERNAME}
@@ -61,14 +56,13 @@ jobs:
         
     - name: Submit Updated Sitemap to Google Search Console
       env:
-        WEBSITE_ENDPOINT: ${{ secrets.WEBSITE_ENDPOINT }}    
+        WEBSITE_ENDPOINT: ${{ secrets.WEBSITE_ENDPOINT }}
       run: |
         curl https://www.google.com/ping?sitemap=${WEBSITE_ENDPOINT}
-        
-    # TODO: Replace hard-coded production URL
-    # - name: Replace baseUrl to Production Path
-    #   run: |
-    #     sed -i -e 's|"baseUrl": \(.*\)|"baseUrl": "https://kenmikanmi.github.io/blog"|g' cypress.json
-
-    # - name: Check if the Deployed page is accessible.
-    #   uses: cypress-io/github-action@v1.16.1
+      
+    - name: Check if the deployed website is accessible
+      env:
+        WEBSITE_ENDPOINT: ${{ secrets.WEBSITE_ENDPOINT }}
+      run: |
+        http_code=`curl -LI ${WEBSITE_ENDPOINT} -o /dev/null -w '%{http_code}\n' -s`
+        if [ ${http_code} -ne 200 ]; then exit 1; fi
