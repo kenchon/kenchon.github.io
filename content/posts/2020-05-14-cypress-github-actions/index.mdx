@@ -112,7 +112,7 @@ yaml はこんなかんじです：
         # 認証
         git config --global user.email ${GIT_ADDRESS}
         git config --global user.name ${GIT_USERNAME}
-        git remote set-url origin https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_SECRET }}@github.com/kenmikanmi/blog
+        git remote set-url origin https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_SECRET }}@github.com/kenchon/blog
         # ビルド＆デプロイ
         gatsby build --prefix-paths && gh-pages -d public -b gh-pages
 ```
@@ -131,6 +131,6 @@ GitHub Actions の GUI から「CI 成功！」のバッジの URL を取れま�
 
 CI が無事に動いて嬉しいのでこのブログにも貼り付けます ✌️
 
-![CI](https://github.com/kenmikanmi/blog/workflows/CI/badge.svg)
+![CI](https://github.com/kenchon/blog/workflows/CI/badge.svg)
 
 それでは，*Happy CI/CD LIFE! 🚀*

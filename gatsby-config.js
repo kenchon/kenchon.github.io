@@ -5,8 +5,8 @@ module.exports = {
   siteMetadata: {
     title: `観照日記  📖✍`,
     name: `Kenya Hondoh`,
-    siteUrl: `https://kenmikanmi.github.io`,
-    description: `kenmikanmi の徒然なるままに書き起こしたブログです。`,
+    siteUrl: `https://kenchon.github.io`,
+    description: `kenchon の徒然なるままに書き起こしたブログです。`,
     hero: {
       heading: `観照日記 📖✍️`,
       maxWidth: 652,
@@ -18,7 +18,7 @@ module.exports = {
       },
       {
         name: `github`,
-        url: `https://github.com/kenmikanmi`,
+        url: `https://github.com/kenchon`,
       },
       {
         name: `instagram`,
@@ -45,7 +45,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://kenmikanmi.github.io/blog`,
+        siteUrl: `https://kenchon.github.io/blog`,
       }
     },
     'gatsby-plugin-sitemap',
@@ -80,8 +80,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `kenmikanmi's blog`,
-        short_name: `kenmikanmi`,
+        name: `kenchon's blog`,
+        short_name: `kenchon`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#fff`,
