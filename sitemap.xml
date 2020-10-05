@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url> <loc>https://kenchon.github.io/blog/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/page/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/seo-analysis-by-google-search-console</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/Grid-on-Images</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/Dependency-Inversion-Story</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/CLEAN-Code-is-What-You-Need</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/conversation-is-what-you-need</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/JavaScript-with-MDN-web-docs</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/farewell-to-anal-fistula</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/beyond-legacy-code</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/Speakerdeck</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/GitHub-Actions-Cypress.io-CICD</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/Android</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/The-Art-of-Readable-Code</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/Hello-World!</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/authors/Kenya-Hondoh</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://kenchon.github.io/blog/authors/Kenya-Hondoh/page/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/page/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/seo-analysis-by-google-search-console</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/Grid-on-Images</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/Dependency-Inversion-Story</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/CLEAN-Code-is-What-You-Need</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/conversation-is-what-you-need</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/JavaScript-with-MDN-web-docs</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/farewell-to-anal-fistula</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/beyond-legacy-code</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/Speakerdeck</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/GitHub-Actions-Cypress.io-CICD</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/Android</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/The-Art-of-Readable-Code</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/Hello-World!</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/authors/Kenya-Hondoh</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/authors/Kenya-Hondoh/page/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
