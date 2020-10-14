@@ -20,10 +20,10 @@ module.exports = {
         name: `github`,
         url: `https://github.com/kenchon`,
       },
-      {
-        name: `instagram`,
-        url: `https://instagram.com/ken5526`,
-      },
+      // {
+      //   name: `instagram`,
+      //   url: `https://instagram.com/ken5526`,
+      // },
       {
         name: `linkedin`,
         url: `https://www.linkedin.com/in/kenya-hondoh-2a7067123/`,
