@@ -1,0 +1,26 @@
+---
+title: 雰囲気でわかる高凝集性
+author: Kenya Hondoh
+date: 2020-10-20
+hero: ./image.png
+excerpt: 図にするとわかるかもしれない
+slug: cohesive-code
+---
+
+### 高凝集性 is 何？
+
+CLEAN コードのひとつ，**高凝集性**。
+
+コードが「高凝集」であるほうがよいというやつのお気持ちは
+
+- 似たもの同士は近くに集まってるコードの方がいいよ
+- クラスの外の変数（グローバル変数）じゃなくて，メンバ変数使おう
+- 使わない変数は宣言しないほうがいいよ
+
+みたいな感じです。
+
+これを定量化した指標があるそうです。それが **LCOM**。
+
+Lack of Cohesion in Methods（メソッド内の凝集性の欠如度合い）のアクロニムです。
+
+参考：Cohesion metrics, https://www.aivosto.com/project/help/pm-oo-cohesion.html
