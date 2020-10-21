@@ -1,26 +1,64 @@
 ---
-title: 雰囲気でわかる高凝集性
+title: 高凝集で疎結合なコード
 author: Kenya Hondoh
 date: 2020-10-20
 hero: ./image.png
-excerpt: 図にするとわかるかもしれない
-slug: cohesive-code
+excerpt: CLEAN コードを書こう
+slug: cohesive-and-less-coupled-code
 ---
 
 ### 高凝集性 is 何？
 
-CLEAN コードのひとつ，**高凝集性**。
+CLEAN コードの C は Cohesive = **高凝集性** の C です。
 
-コードが「高凝集」であるほうがよいというやつのお気持ちは
+コードが「高凝集」だと何がいいんでしょうか。高凝集であるほうがよいというやつのお気持ちは，インターネットや書籍が教えてくれるところによると
 
-- 似たもの同士は近くに集まってるコードの方がいいよ
-- クラスの外の変数（グローバル変数）じゃなくて，メンバ変数使おう
-- 使わない変数は宣言しないほうがいいよ
+- 似たもの同士は近くに集まってるコードの方がいい
+- 関連がないメソッドや変数は別々のクラスにしたほうがいい
 
-みたいな感じです。
+みたいな感じっぽいです。ですが，このままではお気持ちヒューリスティックです。
 
-これを定量化した指標があるそうです。それが **LCOM**。
+そこで，先人達はこのお気持ちを定量化する研究をしてきました。
+その成果のひとつが **LCOM** です。
 
-Lack of Cohesion in Methods（メソッド内の凝集性の欠如度合い）のアクロニムです。
+LCOM は Lack of Cohesion in Methods（メソッド内の凝集性の欠如度合い）のアクロニムです。
 
-参考：Cohesion metrics, https://www.aivosto.com/project/help/pm-oo-cohesion.html
+>**📚 参考**
+>
+>Cohesion metrics, https://www.aivosto.com/project/help/pm-oo-cohesion.html
+
+### LCOM4
+
+**LCOM** には LCOM1,...,LCOM4 と種類があり，いろんなメトリクスが提唱されていますが，
+ネットで調べると LCOM4 [(M. Hiz and B. Montazeri)](https://www.researchgate.net/publication/238729882_Measuring_coupling_and_cohesion_in_object-oriented_systems)
+というやつが実用上よく使われるみたいです。
+
+LCOM が小さいほど，高い凝集性があることを示すのですが，LCOM4 は次のようにして計算されます。
+
+- クラス内のメソッドとメンバ変数をノードとしたグラフを考える
+- 参照し，参照されるノード同士を辺で結ぶ
+- こうしてグラフで表現されたクラス内の，**非連結なグラフ（＝コンポーネント）の個数＝LCOM4**
+
+図にすると，以下のような感じです。
+
+![](https://lh3.googleusercontent.com/UwdLyv0llDIXbSfzX0anfOG5spBGFJwGsuBKxEGOxTWzI9zPJ-GmrZ6K9Uww2qq2gr0N2af1Qb5gGLTqof9wloJvLG0cjPYBy6AeXDLdt3AG2El-TtEaLsEY7pFQy_zuccH4oa8Ey0A)
+
+LCOM4 は常に自然数になりますが，1 のときがもっとも好ましく（高凝集），2 より大きいときはコンポーネントをクラスとして分割することが推奨されています。
+
+グラフじゃなくてもっとシンプルに描いてみました 👇
+
+![](https://lh3.googleusercontent.com/sRn2tV98sYCtE_04P2U11eXT6vIcE73qlqo7cNS94kTagDyWwnNh1TVXlgB5TS-5NLubYYTDLYbZPiAQ5rY5oOpal1N8X-phYaiGt9X8klQzWjf8pAXfcM3VlLNMxlPkYOYWPD3AVMw)
+
+定義上 LCOM はクラス設計における指標ですが，この考え方は関数やソースコードのファイル，ディレクトリ構成といった
+レベルの設計でも適用できます。つまり，関連しているもの同士は近づけて，関連していないものは切り離しておくということです。
+こうすれば，コードを変更するときに影響範囲を考えるのが楽になります。
+
+### まとめ
+
+- 高凝集なコードは，関連しているもの同士を同じクラスに配置しようというプラクティスです。
+- 高凝集性を定量化した LCOM という指標がある。
+
+ちなみに，「高凝集」で「疎結合」なコードという言い回しがありますが，これは簡単に言えば
+**「関連があるものは近づける」（＝高凝集）**, **「関連がないもの同士は切り離す」（＝疎結合）** ということなんでしょうね（多分）。
+
+おわり
