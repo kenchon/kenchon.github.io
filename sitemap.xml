@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 <url> <loc>https://kenchon.github.io/blog/blog/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenchon.github.io/blog/blog/page/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/page/3</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/cohesive-and-less-coupled-code</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenchon.github.io/blog/blog/seo-analysis-by-google-search-console</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenchon.github.io/blog/blog/Grid-on-Images</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenchon.github.io/blog/blog/Dependency-Inversion-Story</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -17,4 +19,5 @@
 <url> <loc>https://kenchon.github.io/blog/blog/Hello-World!</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenchon.github.io/blog/blog/authors/Kenya-Hondoh</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenchon.github.io/blog/blog/authors/Kenya-Hondoh/page/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/blog/blog/authors/Kenya-Hondoh/page/3</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
