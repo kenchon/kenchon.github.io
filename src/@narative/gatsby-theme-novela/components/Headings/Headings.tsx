@@ -70,7 +70,7 @@ const h3 = styled.h3`
   padding-left: 0.5em;
   color: #494949;/*文字色*/
   background-color: ${p => p.theme.colors.h3Background};
-  border-left: solid 5px #ffaf58;/*左線（実線 太さ 色）*/
+  border-left: solid 8px #ffaf58;/*左線（実線 太さ 色）*/
 
   ${commonStyles};
 

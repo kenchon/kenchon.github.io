@@ -11,7 +11,7 @@ const Blockquote = styled.blockquote`
   position: relative;
 	width: 90%;
 	border-right: 2px solid ${p => p.theme.colors.quoteBorder};
-	border-left: 7px solid ${p => p.theme.colors.quoteBorder};
+	border-left: 6px solid ${p => p.theme.colors.quoteBorder};
 	background: #ffffff;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.3);
 
