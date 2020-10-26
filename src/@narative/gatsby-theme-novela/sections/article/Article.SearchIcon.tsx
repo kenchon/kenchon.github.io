@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import searchIcon from './search-icon.png'
 
 const scrollToSearch = () => {
-    const searchContainer = document.getElementById('search-container')
+    const searchContainer = document.getElementById('search-block')
     searchContainer.scrollIntoView({behavior: "smooth", block: 'center'})
 }
 

@@ -9,7 +9,7 @@ const Search: React.FC = (props) => {
     return (
         <div>
             <StyledSearch>
-                <h1>サイト内検索</h1>
+                <h1 id="search-block">サイト内検索</h1>
                 <script type="module" src="https://cse.google.com/cse.js?cx=210b2fa21846e482e"></script>
                 <div id="search-container" className="gcse-search"></div>
             </StyledSearch>
@@ -26,11 +26,12 @@ const StyledSearch = styled.div`
         border-color: gray;
         border-width: 2px;
     }
-    padding: 0 50px 0 50px;
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    /* display: table; */
+    width: 80%;
     z-index: 999;
-    position: absolute;
-    margin-bottom: 30px;
+    /* position: absolute; */
 `
 
 export default Search
