@@ -4,7 +4,10 @@ import searchIcon from './search-icon.png'
 
 const scrollToSearch = () => {
     const searchContainer = document.getElementById('search-block')
+    const inputForm = document.getElementById('gsc-i-id1')
+
     searchContainer.scrollIntoView({behavior: "smooth", block: 'center'})
+    inputForm.focus()
 }
 
 const Search: React.FC = (props) => {
