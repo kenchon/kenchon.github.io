@@ -9,6 +9,7 @@ import Paginator from "@components/Navigation/Navigation.Paginator";
 import ArticlesHero from "../sections/articles/Articles.Hero";
 import ArticlesList from "../sections/articles/Articles.List";
 import Search from "../sections/article/Article.Search";
+import SearchIcon from "../sections/article/Article.SearchIcon";
 
 import { Template } from "@types";
 
@@ -26,6 +27,8 @@ const ArticlesPage: Template = ({ location, pageContext }) => {
           <Paginator {...pageContext} />
         </ArticlesPaginator>
       </Section>
+      <SearchIcon />
+      <Search />
       <ArticlesGradient />
     </Layout>
   );
