@@ -26,6 +26,7 @@ const StyledSearch = styled.div`
         border-color: gray;
         border-width: 2px;
     }
+    max-width: 780px;
     margin-left: auto;
     margin-right: auto;
     /* display: table; */
