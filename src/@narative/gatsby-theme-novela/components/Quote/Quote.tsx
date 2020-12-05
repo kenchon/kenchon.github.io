@@ -72,10 +72,17 @@ const Quote = (props) => {
             <StyledQuote>
                 <blockquote>
                     <p>
-                        {props.moji}
+                        {props.cite}
                     </p>
                     <cite>
-                        {props.cite}
+                        {props.link != undefined &&
+                            <a href={props.link}>
+                                {props.from}
+                            </a>
+                        }
+                        {props.link == undefined &&
+                            props.from
+                        }
                     </cite>
                 </blockquote>
             </StyledQuote>

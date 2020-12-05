@@ -19,6 +19,7 @@ import { ImageZoom } from "@components/Image";
 import Figcaption from "@components/Figcaption";
 import Emphasis from "../Emphasis";
 import Slide from "@components/Slide";
+import Quote from "@components/Quote";
 
 import mediaqueries from "@styles/media";
 import { toKebabCase } from "@utils";
@@ -45,7 +46,8 @@ const components = {
   td: Tables.Cell,
   figcaption: Figcaption,
   em: Emphasis.em,
-  Slide: Slide
+  Slide: Slide,
+  Quote: Quote,
 };
 
 interface MDXProps {
