@@ -25,12 +25,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # - name: Run e2e test
-      #   uses: cypress-io/github-action@v1.16.1
-      #   with:
-      #     start: yarn dev
-      #     wait-on: 'http://localhost:8000'
-      #     wait-on-timeout: 120 # this is enough "yarn dev" to finish
+      - name: Run e2e test
+        uses: cypress-io/github-action@v2
+        with:
+          start: yarn dev
+          wait-on: "http://localhost:8000"
+          wait-on-timeout: 120 # this is enough "yarn dev" to finish
 
       - name: Main building process
         # Artifacts are made under /public dir.
