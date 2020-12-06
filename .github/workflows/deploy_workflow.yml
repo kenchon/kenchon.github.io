@@ -13,56 +13,56 @@ name: Deploy Blog to GitHub Pages
 # WHEN TO RUN THIS WORKFLOW
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 # WORKFLOW
 jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-    - name: Run e2e test
-      uses: cypress-io/github-action@v1.16.1
-      with:
-        start: yarn dev
-        wait-on: 'http://localhost:8000'
-        wait-on-timeout: 120 # this is enough "yarn dev" to finish
+      # - name: Run e2e test
+      #   uses: cypress-io/github-action@v1.16.1
+      #   with:
+      #     start: yarn dev
+      #     wait-on: 'http://localhost:8000'
+      #     wait-on-timeout: 120 # this is enough "yarn dev" to finish
 
-    - name: Main building process
-      # Artifacts are made under /public dir.
-      run: |
-        yarn build
+      - name: Main building process
+        # Artifacts are made under /public dir.
+        run: |
+          yarn build
 
-    - name: Add verification file for Google Search Console(GSC)
-      env:
-        GSC_VERIFICATION_CODE: ${{ secrets.GSC_VERIFICATION_CODE}}
-      run: |
-         echo "google-site-verification: ${GSC_VERIFICATION_CODE}" > ./public/${GSC_VERIFICATION_CODE}
+      - name: Add verification file for Google Search Console(GSC)
+        env:
+          GSC_VERIFICATION_CODE: ${{ secrets.GSC_VERIFICATION_CODE}}
+        run: |
+          echo "google-site-verification: ${GSC_VERIFICATION_CODE}" > ./public/${GSC_VERIFICATION_CODE}
 
-    - name: Deploy Website to GitHub Pages
-      env:
-        GIT_SECRET: ${{ secrets.GIT_SECRET }}
-        GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
-        GIT_ADDRESS: ${{ secrets.GIT_ADDRESS }}
-      run: |
-        git config --global user.email ${GIT_ADDRESS}
-        git config --global user.name ${GIT_USERNAME}
-        git remote set-url origin https://${GIT_USERNAME}:${GIT_SECRET}@github.com/kenchon/blog
-        yarn deploy
-        
-    - name: Submit Updated Sitemap to Google Search Console
-      env:
-        WEBSITE_ENDPOINT: ${{ secrets.WEBSITE_ENDPOINT }}
-      run: |
-        curl https://www.google.com/ping?sitemap=${WEBSITE_ENDPOINT}
-      
-    - name: Check if the deployed website is accessible
-      env:
-        WEBSITE_ENDPOINT: ${{ secrets.WEBSITE_ENDPOINT }}
-      run: |
-        http_code=`curl -LI ${WEBSITE_ENDPOINT} -o /dev/null -w '%{http_code}\n' -s`
-        if [ ${http_code} -ne 200 ]; then exit 1; fi
+      - name: Deploy Website to GitHub Pages
+        env:
+          GIT_SECRET: ${{ secrets.GIT_SECRET }}
+          GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+          GIT_ADDRESS: ${{ secrets.GIT_ADDRESS }}
+        run: |
+          git config --global user.email ${GIT_ADDRESS}
+          git config --global user.name ${GIT_USERNAME}
+          git remote set-url origin https://${GIT_USERNAME}:${GIT_SECRET}@github.com/kenchon/blog
+          yarn deploy
+
+      - name: Submit Updated Sitemap to Google Search Console
+        env:
+          WEBSITE_ENDPOINT: ${{ secrets.WEBSITE_ENDPOINT }}
+        run: |
+          curl https://www.google.com/ping?sitemap=${WEBSITE_ENDPOINT}
+
+      - name: Check if the deployed website is accessible
+        env:
+          WEBSITE_ENDPOINT: ${{ secrets.WEBSITE_ENDPOINT }}
+        run: |
+          http_code=`curl -LI ${WEBSITE_ENDPOINT} -o /dev/null -w '%{http_code}\n' -s`
+          if [ ${http_code} -ne 200 ]; then exit 1; fi
