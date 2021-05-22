@@ -1,11 +1,11 @@
 require('dotenv').config();
 
 module.exports = {
-  pathPrefix: "/blog",
+  pathPrefix: "/",
   siteMetadata: {
     title: `観照日記  📖✍`,
     name: `Kenya Hondoh`,
-    siteUrl: `https://kenchon.github.io/blog`,
+    siteUrl: `https://kenchon.github.io`,
     description: `kenchon の徒然なるままに書き起こしたブログです。`,
     hero: {
       heading: `観照日記 📖✍️`,
@@ -45,7 +45,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://kenchon.github.io/blog`,
+        siteUrl: `https://kenchon.github.io/`,
       }
     },
     'gatsby-plugin-sitemap',
