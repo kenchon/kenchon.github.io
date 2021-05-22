@@ -51,7 +51,7 @@ jobs:
         run: |
           git config --global user.email ${GIT_ADDRESS}
           git config --global user.name ${GIT_USERNAME}
-          git remote set-url origin https://${GIT_USERNAME}:${GIT_SECRET}@github.com/kenchon/blog
+          git remote set-url origin https://${GIT_USERNAME}:${GIT_SECRET}@github.com/kenchon/kenchon.github.io
           yarn deploy
 
       - name: Submit Updated Sitemap to Google Search Console
