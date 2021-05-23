@@ -43,6 +43,12 @@ jobs:
         run: |
           echo "google-site-verification: ${GSC_VERIFICATION_CODE}" > ./public/${GSC_VERIFICATION_CODE}
 
+      - name: Add ads.txt
+        env:
+          GOOGLE_ADS_TXT: ${{ secrets.GOOGLE_ADS_TXT}}
+        run: |
+          echo "${GOOGLE_ADS_TXT}" > ./public/ads.txt 
+
       - name: Deploy Website to GitHub Pages
         env:
           GIT_SECRET: ${{ secrets.GIT_SECRET }}
