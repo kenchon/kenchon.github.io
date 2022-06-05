@@ -3,7 +3,7 @@ require('dotenv').config();
 module.exports = {
   pathPrefix: "/",
   siteMetadata: {
-    title: `観照日記  📖✍`,
+    title: `観照日記  📖✍`,
     name: `Kenya Hondoh`,
     siteUrl: `https://kenchon.github.io`,
     description: `kenchon の徒然なるままに書き起こしたブログです。`,
