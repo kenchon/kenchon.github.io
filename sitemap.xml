@@ -3,6 +3,8 @@
 <url> <loc>https://kenchon.github.io/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenchon.github.io/page/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenchon.github.io/page/3</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/page/4</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/ydkb-hhkb-ble-mod</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenchon.github.io/software-archtecture</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenchon.github.io/combining-characters-emoji</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenchon.github.io/kusatsu-onsen</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -25,4 +27,5 @@
 <url> <loc>https://kenchon.github.io/authors/Kenya-Hondoh</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenchon.github.io/authors/Kenya-Hondoh/page/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://kenchon.github.io/authors/Kenya-Hondoh/page/3</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://kenchon.github.io/authors/Kenya-Hondoh/page/4</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
