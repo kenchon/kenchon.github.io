@@ -4,13 +4,28 @@ author: Kenya Hondoh
 date: 2022-06-06
 hero: ./ydkb.png
 excerpt: hhkb のコントローラを変えていき
-slug: ydkb-hhkb-ble-mod
+slug: ydkb-hhkb-ble-mod-by-yang
 ---
 
-愛用する HHKB のコントローラ（キーボードの物理的な信号を、パソコンとかが認識できる信号として USB とかで出力してくれる機器）を *Alternative Controller for HHKB* by hasu から *HHKB BLE MOD* by yang に変えました。
+### なんの記事か
+
+- キーボード入力の自由度を高めるため、HHKB のコントローラーを YDKB HHKB BLE MOD に置き換えた
+- （自分の不注意で）回路がショートし、回路素子が破損したが、交換したら治った
+- 高いが電池の持ちがとてもいいのでおすすめ
+
+### 背景
+
+愛用する HHKB のコントローラ（キーボードを打鍵したときの電気信号を、パソコンとかが認識できる信号に変換して USB とかで出力してくれる機器）を **Alternative Controller for HHKB** by hasu から **HHKB BLE MOD** by yang に変えました。
 その過程でいろいろあったのでその話を書きたいと思います。
 
-ydkb それ自体の話はあまりしないので、機能や使い勝手をイメージしたい方は [ドキュメント](https://ydkb.io/help/#/) を読むのをおすすめします。
+YDKB それ自体の話はあまりしないので、機能や使い勝手をイメージしたい方は [ドキュメント](https://ydkb.io/help/#/) を読むのをおすすめします。
+
+### YANG HHKB BLE コントローラの特徴
+
+- BLE による省電力化 (通常のリポバッテリーで3週間程度持つ)
+- [GUI](https://ydkb.io/) で気軽にキーマップを修正できる
+- 小型 USB メモリをつけることで、HHKB をストレージのようにして使うことができる
+- ドキュメントが比較的ちゃんと整理されている [YDKB by YAND Documentation](https://ydkb.io/help/#/)
 
 ### hasu から yang へ、コントローラ換装の動機
 
@@ -21,11 +36,11 @@ ydkb それ自体の話はあまりしないので、機能や使い勝手をイ
 
 ができるということを知り、換装しました。
 
-しかし、hasu コントローラの消費電力は激しく、フル充電後の無線接続は5~6時間くらいしか持たないので（3.7V/1000mA リポバッテリー使用時）、結局ずっと有線接続で使用していました。
+しかし、**hasu コントローラの消費電力は激しく、フル充電後の無線接続は5~6時間くらいしか持たないので（3.7V/1000mA リポバッテリー使用時）、結局ずっと有線接続で使用**していました。
 
 その後、Yang さんという方がいろいろ工夫してこの課題に取り組み、その成果を **HHKB BLE MOD** として結実させました。
 
->BLE = Bluetooth Low Energy （Bluetooth の省電力化を実現する拡張仕様）の意
+BLE = Bluetooth Low Energy （Bluetooth の省電力化を実現する拡張仕様）の意
 
 無線化信者なので買うことにしました。
 
@@ -58,16 +73,14 @@ AliExpress で購入し、3週間ほどで届きました。
 >![](./broken.png)
 > 破損部位。箱状の素子の中央部分に破裂したような形跡がある。
 
-### 回路素子の調達
+### 回路素子の調達・はんだづけ
 
 破裂した素子に着目すると、この表面に「4S」という文字列が記述されているのがわかりました。
 この手がかりから、[同一のものと思われるダイオード](https://nl.aliexpress.com/item/32430050371.html?_randl_currency=JPY&_randl_shipto=JP&src=google&memo1=freelisting&aff_fcid=2124d3af0e0d4c8aad4a279286b0bf1a-1656261556526-06424-UneMJZVf&aff_fsk=UneMJZVf&aff_platform=aaf&sk=UneMJZVf&aff_trace_key=2124d3af0e0d4c8aad4a279286b0bf1a-1656261556526-06424-UneMJZVf&terminal_id=e042671dc5f44db48bdb03475a8c5371&afSmartRedirect=y)を特定しました。
 このショートキーダイオードは 40V/1A というスペックであることがわかったため、秋葉原の秋月電子通商で代替品を購入しました。
 
-### はんだづけ
-
-1~2mm のダイオードを慣れない手つきではんだづけし、その結果復活しました。
+その後、1~2mm のダイオードを慣れない手つきではんだづけし、その結果**復活しました。**
 
 ### 使用感
 
-電池の持ちが圧倒的に良いです。また、キーボード側の出力端子が usb type-c なのも良いです。
+とてもいいです。
