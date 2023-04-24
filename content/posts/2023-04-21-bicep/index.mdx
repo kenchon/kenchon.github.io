@@ -42,15 +42,64 @@ Azure Bicep を使い始めて１年くらい経ったので、個人的にリ�
 
 ![](./rg-after.png)
 
-Azure は、上記のポリシーでリソースグループが設計される前提でいろんな仕組みを作っています。
+Azure は、上記で述べたポリシーでリソースグループを設計する前提でいろんな仕組みを作っています。
 
-テンプレートを使用したデプロイがリソースグループ単位で行われることなどがその一例です。
-このポリシーに従うことで、Azure の諸々の仕組みの恩恵を受けやすくなります。
+特に理由がなければ高凝集・疎結合なリソース設計をおすすめします。
+
+---
+
+具体例として、Azure Function のテンプレート定義の可視化したものを下記に示します。なおこのテンプレートは、MS が公開している [azure-quickstart-templates](https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.web/function-app-storage-private-endpoints/main.bicep) の抜粋です。
+
+この例では、Azure Function を動かすのに必要十分な一式のリソースが定義されています。
+
+![](./resources.png)
+
+もし VNet や App Service Plan が複数チームで共有されるような場合は、リソースグループを分けた方が良いと思います。
 
 ### リソース定義とアプリケーションコードを近くで管理する
 
-後日追記します。
+当たり前に感じる人も多いかと思いますが、特に事情がなければ、リソース定義とアプリケーションコードは同一リポジトリで管理するのが良いと思います。
+
+アプリケーションコードと Dockerfile を同一リポジトリに配置するのと同じです。「IaC」「アプリ」みたいな技術スタックでリポジトリを分けるのは一見合理的に聞こえるかもしれませんが、技術スタックを跨いだ変更が辛くなります。私は一度、技術スタックごとに担当者がいるチームでそれをやって辛い思いをしました。
 
 ### 環境との差異を調べ、意図しない変更を防ぐ
 
-後日追記します。
+一般に IaC ツールには、定義と実際のリソースとの差分を検出する機能があります。
+
+ARM にも同様の機能があるので、リソース定義の CD Pipeline に差分検出の仕組みを入れることをおすすめします。
+
+コマンド例：
+
+```bash
+az deployment sub what-if `
+  -x NoChange Ignore `
+  --only-show-errors `
+  -f templates/vnet.bicep `
+  --location japaneast `
+  --parameters `
+    env=$(env) `
+    --only-show-errors
+```
+
+実行結果の例：
+
+>![](./iac-diff.png)
+>
+> [ARM テンプレート デプロイの What-If 操作](https://learn.microsoft.com/ja-jp/azure/azure-resource-manager/templates/deploy-what-if?tabs=azure-powershell)
+
+以下のようにマルチステージなデプロイを定義すれば「差分を事前に検出し、意図した変更であれば承認してリリースする」仕組みを作ることができます。
+
+```
+🤖差分検出 ---> 🙍目視で差分を確認・承認 ---> 🤖デプロイ
+```
+
+> 📚 承認の仕組みについては公式ドキュメントが詳しいです。
+>
+> [Azure DevOps - Define approvals and checks](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops&tabs=check-pass#approvals)
+
+---
+
+### まとめ
+
+Azure で IaC やる中でデフォルトとしているポリシーについて紹介しました。
+チームに人が増えていくと、みんながそれぞれ好き勝手にやって複雑で認知負荷の高いリポジトリやリソース構成が出来上がることが（経験上）多いので、こうしたポリシーはあらかじめみんなで話し合って明文化しておくと良いと思います。
