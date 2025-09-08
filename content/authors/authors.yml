@@ -1,9 +1,8 @@
 - name: Kenya Hondoh
   bio: |- 
-    方向性を見失いがちなエンジニア
-  avatar: ./avatars/kenya_hondoh.jpg
+    たのしく生きてます
+  avatar: ./avatars/icon.png
   social:
     - url: https://github.com/kenchon
-    - url: https://twitter.com/Earllibrary
     # - url: https://qiita.com/kenchon
   featured: true
