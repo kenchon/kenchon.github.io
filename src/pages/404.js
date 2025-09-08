@@ -17,7 +17,7 @@ function NotFoundPage() {
           <div style={{marginTop: "30px"}}></div>
           <img width="100%" src="https://lh3.googleusercontent.com/Vl8oKfNwRSdk5w-zpnMIXqh7dy4CWH6wMNQtzEfBtwzSyS2ImDulAjTSlaCJ_GQwZp5XNe0GoyNHB1rdWbF42_ShxvyxbmM6Kk1hIgf_xuXgesjR8D5Kch0z9JfRSfeq-rBI-zDFZxk" alt="I'm sorry!"></img>
           <div style={{marginTop: "30px"}}></div>
-          <Headings.h1>Click <Link to="/">Here</Link> To Get It Back!</Headings.h1>
+          <Headings.h1>Click <Link to="/">Here</Link> To Return!</Headings.h1>
         </div>
       </Section>
     </Layout>
